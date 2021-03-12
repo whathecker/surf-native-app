@@ -1,5 +1,5 @@
 const helloworld6 = "Hello World";
 
-export default () : string => {
-    return helloworld6;
-}
+export default (): string => {
+  return helloworld6;
+};
