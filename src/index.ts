@@ -1,3 +1,5 @@
 const helloworld6 = "Hello World";
 
-console.log(helloworld6);
+export default () : string => {
+    return helloworld6;
+}
