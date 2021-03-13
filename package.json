@@ -6,14 +6,17 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll",
+    "test": "jest",
     "lint": "eslint ./src --ext .ts,.tsx,.js,.jsx,.json --max-warnings 0",
-    "lint:fix": "eslint ./src --ext .ts,.tsx,.js,.jsx,.json--fix",
+    "lint:fix": "eslint ./src --ext .ts,.tsx,.js,.jsx,.json --fix",
     "prettier-format": "prettier --config .prettierrc '**/*.{json,js,jsx,ts,tsx,css,scss,md}' --write",
     "husky:precommit": "yarn prettier-format && yarn lint"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
+    ]
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
@@ -41,6 +44,7 @@
     "@babel/core": "~7.9.0",
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
+    "@types/jest": "^26.0.20",
     "@types/react": "^17.0.3",
     "@types/react-native": "~0.63.2",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
@@ -54,6 +58,7 @@
     "husky": "^4.3.6",
     "jest-expo": "~40.0.0",
     "prettier": "^2.2.1",
+    "react-test-renderer": "^16.13.1",
     "typescript": "~4.0.0"
   },
   "husky": {
