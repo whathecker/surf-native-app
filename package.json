@@ -58,7 +58,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run husky:precommit"
+      "pre-commit": "npm run husky:precommit",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "private": true
