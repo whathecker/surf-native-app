@@ -1,7 +1,7 @@
 import { ViewStyle } from "react-native";
 
 export const centerAlignedContainer: ViewStyle = {
-  flexDirection: "column",
+  flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
 };

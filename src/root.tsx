@@ -11,7 +11,11 @@ const Stack = createStackNavigator();
 const LoginNav: React.FunctionComponent = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Sign Up" component={SignUpScreen} />
+      <Stack.Screen
+        name="Sign Up"
+        options={{ headerShown: false }}
+        component={SignUpScreen}
+      />
     </Stack.Navigator>
   );
 };
