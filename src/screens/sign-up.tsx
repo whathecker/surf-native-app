@@ -2,6 +2,8 @@ import * as React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { Typography, Icon, Container } from "../styles";
 
+import { AuthButton } from "../components";
+
 const SignUpScreen: React.FunctionComponent = () => {
   return (
     <>
@@ -23,7 +25,9 @@ const SignUpScreen: React.FunctionComponent = () => {
         </View>
       </View>
       <View style={styles.authButtonsWrapper}>
-        <Text>Add authentcation buttons here</Text>
+        <View style={styles.btnInnerWrapper}>
+          <AuthButton />
+        </View>
       </View>
     </>
   );
@@ -57,6 +61,9 @@ const styles = StyleSheet.create({
   authButtonsWrapper: {
     ...Container.centerAlignedContainer,
     paddingTop: 70,
+  },
+  btnInnerWrapper: {
+    width: "75%",
   },
 });
 
