@@ -1,15 +1,24 @@
 import React from "react";
 import { TouchableOpacity, Image, Text, StyleSheet } from "react-native";
 import { Typography, Icon, Container } from "../../styles";
+import { AuthButtonProps } from "./types";
+import { capitalizeFirstChar } from "../../utils";
 
-const AuthButton: React.FunctionComponent = () => {
+const AuthButton: React.FC<AuthButtonProps> = ({
+  authBrand,
+}: AuthButtonProps) => {
+  let authBrandIcon;
+
+  authBrand === "apple"
+    ? (authBrandIcon = require(`../../../assets/icons/auth-icons/apple.png`))
+    : null;
+
   return (
     <TouchableOpacity style={styles.authButton}>
-      <Image
-        style={styles.brandIcon}
-        source={require("../../../assets/icons/apple_white.png")}
-      />
-      <Text style={styles.buttonText}>Sign Up with Apple</Text>
+      <Image style={styles.brandIcon} source={authBrandIcon} />
+      <Text style={styles.buttonText}>{`Sign Up with ${capitalizeFirstChar(
+        authBrand,
+      )}`}</Text>
     </TouchableOpacity>
   );
 };
@@ -25,7 +34,7 @@ const styles = StyleSheet.create({
   },
   brandIcon: {
     ...Icon.authBrandIcon,
-    marginRight: 15,
+    marginRight: 25,
   },
   buttonText: {
     ...Typography.p,

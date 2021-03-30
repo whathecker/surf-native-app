@@ -26,7 +26,8 @@ const SignUpScreen: React.FunctionComponent = () => {
       </View>
       <View style={styles.authButtonsWrapper}>
         <View style={styles.btnInnerWrapper}>
-          <AuthButton />
+          <AuthButton authBrand="apple" />
+          <AuthButton authBrand="facebook" />
         </View>
       </View>
     </>
