@@ -27,7 +27,12 @@ const SignUpScreen: React.FunctionComponent = () => {
       <View style={styles.authButtonsWrapper}>
         <View style={styles.btnInnerWrapper}>
           <AuthButton authBrand="apple" />
+        </View>
+        <View style={styles.btnInnerWrapper}>
           <AuthButton authBrand="facebook" />
+        </View>
+        <View style={styles.btnInnerWrapper}>
+          <AuthButton authBrand="google" />
         </View>
       </View>
     </>
@@ -37,16 +42,16 @@ const SignUpScreen: React.FunctionComponent = () => {
 const styles = StyleSheet.create({
   iconWrapper: {
     ...Container.centerAlignedContainer,
-    paddingTop: 100,
-    paddingBottom: 20,
+    paddingTop: "20%",
+    paddingBottom: "10%",
   },
   iconImage: {
     ...Icon.appIconLarge,
   },
   textWrapper: {
     ...Container.centerAlignedContainer,
-    paddingTop: 12,
-    paddingBottom: 12,
+    paddingTop: "1.5%",
+    paddingBottom: "1.5%",
   },
   textInnerWrapper: {
     width: "85%",
@@ -60,11 +65,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   authButtonsWrapper: {
-    ...Container.centerAlignedContainer,
-    paddingTop: 70,
+    ...Container.centerAlignedContainerVertical,
+    paddingTop: "20%",
   },
   btnInnerWrapper: {
     width: "75%",
+    paddingTop: 3,
+    paddingBottom: 3,
   },
 });
 

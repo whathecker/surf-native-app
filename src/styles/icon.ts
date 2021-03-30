@@ -6,6 +6,6 @@ export const appIconLarge: ImageStyle = {
 };
 
 export const authBrandIcon: ImageStyle = {
-  width: 35,
-  height: 35,
+  width: 30,
+  height: 30,
 };
