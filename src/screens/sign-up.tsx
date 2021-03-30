@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, Platform, StyleSheet } from "react-native";
 import { Typography, Icon, Container } from "../styles";
 
 import { AuthButton } from "../components";
@@ -25,15 +25,20 @@ const SignUpScreen: React.FunctionComponent = () => {
         </View>
       </View>
       <View style={styles.authButtonsWrapper}>
-        <View style={styles.btnInnerWrapper}>
-          <AuthButton authBrand="apple" />
-        </View>
+        {Platform.OS === "ios" ? (
+          <View style={styles.btnInnerWrapper}>
+            <AuthButton authBrand="apple" />
+          </View>
+        ) : null}
         <View style={styles.btnInnerWrapper}>
           <AuthButton authBrand="facebook" />
         </View>
         <View style={styles.btnInnerWrapper}>
           <AuthButton authBrand="google" />
         </View>
+      </View>
+      <View style={styles.signInWrapper}>
+        <Text style={styles.bodyText}>Already have an account? Sign in</Text>
       </View>
     </>
   );
@@ -42,7 +47,7 @@ const SignUpScreen: React.FunctionComponent = () => {
 const styles = StyleSheet.create({
   iconWrapper: {
     ...Container.centerAlignedContainer,
-    paddingTop: "20%",
+    paddingTop: "25%",
     paddingBottom: "10%",
   },
   iconImage: {
@@ -72,6 +77,9 @@ const styles = StyleSheet.create({
     width: "75%",
     paddingTop: 3,
     paddingBottom: 3,
+  },
+  signInWrapper: {
+    paddingTop: 15,
   },
 });
 
