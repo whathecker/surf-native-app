@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from "react";
 import * as AppleAuthentication from "expo-apple-authentication";
 
@@ -14,12 +15,14 @@ const AppleAuthButton: React.FC = () => {
         }}
         onPress={async () => {
           try {
-            await AppleAuthentication.signInAsync({
+            const credential = await AppleAuthentication.signInAsync({
               requestedScopes: [
                 AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
                 AppleAuthentication.AppleAuthenticationScope.EMAIL,
               ],
             });
+
+            console.log(credential);
             // signed in
           } catch (e) {
             if (e.code === "ERR_CANCELED") {

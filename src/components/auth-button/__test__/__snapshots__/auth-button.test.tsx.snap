@@ -3,7 +3,7 @@
 exports[`Test AuthButton component should renders apple auth button correctly 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -59,7 +59,7 @@ exports[`Test AuthButton component should renders apple auth button correctly 1`
 exports[`Test AuthButton component should renders facebook auth button correctly 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -115,7 +115,7 @@ exports[`Test AuthButton component should renders facebook auth button correctly
 exports[`Test AuthButton component should renders google auth button correctly 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}

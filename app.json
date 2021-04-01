@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "surf-native-app",
-    "slug": "surf-native-app",
+    "slug": "surf-journal-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -18,7 +18,8 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "usesAppleSignIn": true
+      "usesAppleSignIn": true,
+      "bundleIdentifier": "com.koelkast.surfjournalapp"
     },
     "android": {
       "adaptiveIcon": {

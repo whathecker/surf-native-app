@@ -1,8 +1,7 @@
 import * as React from "react";
 import { View, Text, Image, Platform, StyleSheet } from "react-native";
 import { Typography, Icon, Container } from "../styles";
-
-import { AuthButton, AppleAuthButton } from "../components";
+import { AuthButton } from "../components";
 
 const SignUpScreen: React.FunctionComponent = () => {
   return (
@@ -27,7 +26,7 @@ const SignUpScreen: React.FunctionComponent = () => {
       <View style={styles.authButtonsWrapper}>
         {Platform.OS === "ios" ? (
           <View style={styles.btnInnerWrapper}>
-            <AppleAuthButton />
+            <AuthButton authBrand="apple" />
           </View>
         ) : null}
         <View style={styles.btnInnerWrapper}>

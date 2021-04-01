@@ -1,8 +1,39 @@
+/* eslint-disable no-console */
 import React from "react";
+import * as AuthSession from "expo-auth-session";
 import { TouchableOpacity, View, Image, Text, StyleSheet } from "react-native";
 import { Typography, Icon, Container } from "../../styles";
 import { AuthButtonProps } from "./types";
 import { capitalizeFirstChar } from "../../utils";
+
+const auth0ClientId = "M6bdC9X6ACFckrMCBqxlaPK9t4Q1GKiA";
+const auth0Domain = "https://dev-817dakf7.eu.auth0.com";
+
+const _handlePressAsync = async (idp: string) => {
+  const redirectUrl = AuthSession.makeRedirectUri({ useProxy: true });
+  const authUrl =
+    `${auth0Domain}/authorize` +
+    toQueryString({
+      client_id: auth0ClientId,
+      connection: idp,
+      response_type: "token",
+      redirect_uri: redirectUrl,
+    });
+  const result = await AuthSession.startAsync({ authUrl });
+  console.log(result);
+};
+
+function toQueryString(params: Record<string, string>) {
+  return (
+    "?" +
+    Object.entries(params)
+      .map(
+        ([key, value]) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
+      )
+      .join("&")
+  );
+}
 
 const AuthButton: React.FC<AuthButtonProps> = ({
   authBrand,
@@ -30,7 +61,12 @@ const AuthButton: React.FC<AuthButtonProps> = ({
     : (btnTextStyle = styles.buttonText);
 
   return (
-    <TouchableOpacity style={authBtnStyle}>
+    <TouchableOpacity
+      onPress={() => {
+        _handlePressAsync(authBrand);
+      }}
+      style={authBtnStyle}
+    >
       <View style={styles.iconContainer}>
         <Image style={styles.brandIcon} source={authBrandIcon} />
       </View>
