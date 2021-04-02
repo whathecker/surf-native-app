@@ -6,12 +6,10 @@ import { View, Text, Image, Platform, StyleSheet } from "react-native";
 import { Typography, Icon, Container } from "../styles";
 import { AuthButton } from "../components";
 
-type SignUpScreenNavProp = StackNavigationProp<LoginStackParamList, "SignUp">;
-type Props = { navigation: SignUpScreenNavProp };
+type SignInScreenNavProp = StackNavigationProp<LoginStackParamList, "SignIn">;
+type Props = { navigation: SignInScreenNavProp };
 
-const SignUpScreen: React.FunctionComponent<Props> = ({
-  navigation,
-}: Props) => {
+const SignInScreen: React.FC<Props> = ({ navigation }: Props) => {
   return (
     <>
       <View style={styles.iconWrapper}>
@@ -21,15 +19,7 @@ const SignUpScreen: React.FunctionComponent<Props> = ({
         />
       </View>
       <View style={styles.textWrapper}>
-        <Text style={styles.headerText}>Surf App</Text>
-      </View>
-      <View style={styles.textWrapper}>
-        <View style={styles.textInnerWrapper}>
-          <Text style={styles.bodyText}>
-            In Surf Journal app you can explore and remember best surf condition
-            for you
-          </Text>
-        </View>
+        <Text style={styles.headerText}>Welcome Back!</Text>
       </View>
       <View style={styles.authButtonsWrapper}>
         {Platform.OS === "ios" ? (
@@ -44,16 +34,16 @@ const SignUpScreen: React.FunctionComponent<Props> = ({
           <AuthButton authBrand="google" />
         </View>
       </View>
-      <View style={styles.signInWrapper}>
+      <View style={styles.signUpWrapper}>
         <Text style={styles.bodyText}>
-          Already have an account?{" "}
+          {"Don't have an account yet?"}{" "}
           <Text
             onPress={() => {
-              navigation.navigate("SignIn");
+              navigation.navigate("SignUp");
             }}
-            style={styles.signinText}
+            style={styles.signUpText}
           >
-            Sign In
+            Sign Up
           </Text>
         </Text>
       </View>
@@ -75,9 +65,6 @@ const styles = StyleSheet.create({
     paddingTop: "1.5%",
     paddingBottom: "1.5%",
   },
-  textInnerWrapper: {
-    width: "85%",
-  },
   headerText: {
     ...Typography.h1,
     textAlign: "center",
@@ -86,23 +73,23 @@ const styles = StyleSheet.create({
     ...Typography.p,
     textAlign: "center",
   },
-  signinText: {
+  signUpText: {
     ...Typography.p,
     textAlign: "center",
     color: "blue",
   },
   authButtonsWrapper: {
     ...Container.centerAlignedContainerVertical,
-    paddingTop: "20%",
+    paddingTop: "31%",
   },
   btnInnerWrapper: {
     width: "75%",
     paddingTop: 3,
     paddingBottom: 3,
   },
-  signInWrapper: {
+  signUpWrapper: {
     paddingTop: 15,
   },
 });
 
-export default SignUpScreen;
+export default SignInScreen;

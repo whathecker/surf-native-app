@@ -3,20 +3,26 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AuthContext } from "./context/auth-context";
 
-import { HomeScreen, SignUpScreen } from "./screens";
+import { LoginStackParamList } from "./types/route-params";
+import { HomeScreen, SignUpScreen, SignInScreen } from "./screens";
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
+const LoginStack = createStackNavigator<LoginStackParamList>();
 
 const LoginNav: React.FunctionComponent = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Sign Up"
+    <LoginStack.Navigator>
+      <LoginStack.Screen
+        name="SignUp"
         options={{ headerShown: false }}
         component={SignUpScreen}
       />
-    </Stack.Navigator>
+      <LoginStack.Screen
+        name="SignIn"
+        options={{ headerShown: false }}
+        component={SignInScreen}
+      />
+    </LoginStack.Navigator>
   );
 };
 
