@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useReducer } from "react";
+import { authApi } from "../api";
+import { secureStorage } from "../utils";
 
 type AuthState = {
   token: string | null;
@@ -37,19 +38,48 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
   }
 };
 
-const signIn = (_dispatch: React.Dispatch<AuthAction>) => {
-  return async () => {
-    // call backend with auth0 access code to get the token
-    // when call was successful store the token in the SecureStorage and update the state by calling SIGN_IN action
-    // when it failed, update the state with error message
+const signIn = (dispatch: React.Dispatch<AuthAction>) => {
+  return async (authCode: string) => {
+    try {
+      const result = await authApi.getAuthToken(authCode);
+      await secureStorage.save("token", result.authToken);
+
+      dispatch({
+        type: AuthActionType.signIn,
+        payload: { token: result.authToken },
+      });
+      // TODO: add navigation to next screen
+    } catch (e) {
+      dispatch({
+        type: AuthActionType.error,
+        payload: { token: null, errorMsg: e },
+      });
+    }
   };
 };
 
-const restoreToken = (_dispatch: React.Dispatch<AuthAction>) => {
+const restoreToken = (dispatch: React.Dispatch<AuthAction>) => {
   return async () => {
-    // try to fetch token from local storage
-    // when successfully fetch the token then update the state by calling RESTORE_TOKEN action and send user to home screen
-    // when it failed to find the token send the user to sign-in screen
+    try {
+      const authToken = await secureStorage.getValue("token");
+
+      if (authToken === null) {
+        //TODO: send user to sign-in screen
+      }
+
+      if (authToken) {
+        dispatch({
+          type: AuthActionType.restore,
+          payload: { token: authToken },
+        });
+        //TODO: send user to right next step
+      }
+    } catch (e) {
+      dispatch({
+        type: AuthActionType.error,
+        payload: { token: null, errorMsg: e },
+      });
+    }
   };
 };
 
