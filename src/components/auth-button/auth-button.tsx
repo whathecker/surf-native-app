@@ -15,7 +15,7 @@ const _handlePressAsync = async (idp: string) => {
     `${auth0Domain}/authorize` +
     getQueryString({
       client_id: auth0ClientId,
-      connection: idp,
+      connection: idp === "google" ? "google-oauth2" : idp,
       response_type: "token",
       redirect_uri: redirectUrl,
     });
