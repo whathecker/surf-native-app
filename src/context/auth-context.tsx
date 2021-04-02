@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import { authApi } from "../api";
-import { secureStorage } from "../utils";
+import { secureStorage, navigationRef } from "../utils";
 
 type AuthState = {
   token: string | null;
@@ -39,16 +39,18 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
 };
 
 const signIn = (dispatch: React.Dispatch<AuthAction>) => {
-  return async (authCode: string) => {
+  return async (authIdp: string) => {
     try {
-      const result = await authApi.getAuthToken(authCode);
+      const oauthResultCode = await authApi.handleOAuth(authIdp);
+      const result = await authApi.getAuthToken(oauthResultCode);
+
       await secureStorage.save("token", result.authToken);
 
       dispatch({
         type: AuthActionType.signIn,
         payload: { token: result.authToken },
       });
-      // TODO: add navigation to next screen
+      navigationRef.navigate("SignUp");
     } catch (e) {
       dispatch({
         type: AuthActionType.error,
@@ -64,7 +66,7 @@ const restoreToken = (dispatch: React.Dispatch<AuthAction>) => {
       const authToken = await secureStorage.getValue("token");
 
       if (authToken === null) {
-        //TODO: send user to sign-in screen
+        navigationRef.navigate("SignIn");
       }
 
       if (authToken) {
@@ -72,7 +74,7 @@ const restoreToken = (dispatch: React.Dispatch<AuthAction>) => {
           type: AuthActionType.restore,
           payload: { token: authToken },
         });
-        //TODO: send user to right next step
+        navigationRef.navigate("Home");
       }
     } catch (e) {
       dispatch({
