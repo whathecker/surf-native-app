@@ -36,7 +36,7 @@ const UserNav: React.FunctionComponent = () => {
 
 const Root: React.FunctionComponent = () => {
   const authContext = useContext(AuthContext);
-  return <>{authContext.token ? <UserNav /> : <LoginNav />}</>;
+  return <>{authContext.state.token ? <UserNav /> : <LoginNav />}</>;
 };
 
 export default Root;
