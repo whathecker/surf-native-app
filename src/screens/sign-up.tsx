@@ -34,14 +34,14 @@ const SignUpScreen: React.FunctionComponent<Props> = ({
       <View style={styles.authButtonsWrapper}>
         {Platform.OS === "ios" ? (
           <View style={styles.btnInnerWrapper}>
-            <AuthButton authBrand="apple" />
+            <AuthButton authBrand="apple" screenType="signup" />
           </View>
         ) : null}
         <View style={styles.btnInnerWrapper}>
-          <AuthButton authBrand="facebook" />
+          <AuthButton authBrand="facebook" screenType="signup" />
         </View>
         <View style={styles.btnInnerWrapper}>
-          <AuthButton authBrand="google" />
+          <AuthButton authBrand="google" screenType="signup" />
         </View>
       </View>
       <View style={styles.signInWrapper}>

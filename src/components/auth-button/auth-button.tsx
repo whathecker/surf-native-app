@@ -37,6 +37,7 @@ function toQueryString(params: Record<string, string>) {
 
 const AuthButton: React.FC<AuthButtonProps> = ({
   authBrand,
+  screenType,
 }: AuthButtonProps) => {
   let authBrandIcon;
 
@@ -60,6 +61,9 @@ const AuthButton: React.FC<AuthButtonProps> = ({
     ? (btnTextStyle = styles.buttonTextBlk)
     : (btnTextStyle = styles.buttonText);
 
+  let buttonText = "Continue with";
+  screenType === "signup" ? (buttonText = "Sign up with") : null;
+
   return (
     <TouchableOpacity
       onPress={() => {
@@ -70,7 +74,7 @@ const AuthButton: React.FC<AuthButtonProps> = ({
       <View style={styles.iconContainer}>
         <Image style={styles.brandIcon} source={authBrandIcon} />
       </View>
-      <Text style={btnTextStyle}>{`Sign Up with ${capitalizeFirstChar(
+      <Text style={btnTextStyle}>{`${buttonText} ${capitalizeFirstChar(
         authBrand,
       )}`}</Text>
     </TouchableOpacity>

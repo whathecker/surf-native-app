@@ -24,14 +24,14 @@ const SignInScreen: React.FC<Props> = ({ navigation }: Props) => {
       <View style={styles.authButtonsWrapper}>
         {Platform.OS === "ios" ? (
           <View style={styles.btnInnerWrapper}>
-            <AuthButton authBrand="apple" />
+            <AuthButton authBrand="apple" screenType="signin" />
           </View>
         ) : null}
         <View style={styles.btnInnerWrapper}>
-          <AuthButton authBrand="facebook" />
+          <AuthButton authBrand="facebook" screenType="signin" />
         </View>
         <View style={styles.btnInnerWrapper}>
-          <AuthButton authBrand="google" />
+          <AuthButton authBrand="google" screenType="signin" />
         </View>
       </View>
       <View style={styles.signUpWrapper}>

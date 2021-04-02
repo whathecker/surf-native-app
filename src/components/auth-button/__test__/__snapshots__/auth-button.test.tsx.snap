@@ -51,7 +51,7 @@ exports[`Test AuthButton component should renders apple auth button correctly 1`
       }
     }
   >
-    Sign Up with Apple
+    Continue with Apple
   </Text>
 </View>
 `;
@@ -107,7 +107,7 @@ exports[`Test AuthButton component should renders facebook auth button correctly
       }
     }
   >
-    Sign Up with Facebook
+    Continue with Facebook
   </Text>
 </View>
 `;
@@ -163,7 +163,7 @@ exports[`Test AuthButton component should renders google auth button correctly 1
       }
     }
   >
-    Sign Up with Facebook
+    Continue with Facebook
   </Text>
 </View>
 `;
