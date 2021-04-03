@@ -1,9 +1,13 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-//import { AuthContext } from "./context/auth-context";
 import { AuthStackParamList } from "./types/route-params";
-import { HomeScreen, SignUpScreen, SignInScreen } from "./screens";
+import {
+  HomeScreen,
+  SignUpScreen,
+  SignInScreen,
+  ResolveAuthScreen,
+} from "./screens";
 
 const RootStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -35,7 +39,8 @@ const AppNav: React.FunctionComponent = () => {
 
 const Root: React.FunctionComponent = () => {
   return (
-    <RootStack.Navigator>
+    <RootStack.Navigator initialRouteName="ResolveAuth">
+      <RootStack.Screen name="ResolveAuth" component={ResolveAuthScreen} />
       <RootStack.Screen
         name="Auth"
         options={{ headerShown: false }}

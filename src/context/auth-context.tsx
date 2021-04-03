@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useReducer } from "react";
 import { authApi } from "../api";
 import { secureStorage, navigationRef } from "../utils";
@@ -26,11 +27,11 @@ type AuthAction = {
 const authReducer = (state: AuthState, action: AuthAction): AuthState => {
   switch (action.type) {
     case "RESTORE_TOKEN":
-      return { token: action.payload?.token, ...state };
+      return { ...state, token: action.payload!.token };
     case "SIGN_IN":
-      return { token: action.payload?.token, ...state };
+      return { ...state, token: action.payload!.token };
     case "SIGN_OUT":
-      return { token: null, ...state };
+      return { ...state, token: null };
     case "ERROR":
       return { token: null, errorMsg: action.payload?.errorMsg };
     default:
