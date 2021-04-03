@@ -1,32 +1,35 @@
-import React, { useContext } from "react";
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { AuthContext } from "./context/auth-context";
+import { AuthStackParamList } from "./types/route-params";
+import {
+  HomeScreen,
+  SignUpScreen,
+  SignInScreen,
+  ResolveAuthScreen,
+} from "./screens";
 
-import { LoginStackParamList } from "./types/route-params";
-import { HomeScreen, SignUpScreen, SignInScreen } from "./screens";
-
+const RootStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-const LoginStack = createStackNavigator<LoginStackParamList>();
+const AuthStack = createStackNavigator<AuthStackParamList>();
 
-const LoginNav: React.FunctionComponent = () => {
+const AuthNav: React.FunctionComponent = () => {
   return (
-    <LoginStack.Navigator>
-      <LoginStack.Screen
+    <AuthStack.Navigator>
+      <AuthStack.Screen
         name="SignUp"
         options={{ headerShown: false }}
         component={SignUpScreen}
       />
-      <LoginStack.Screen
+      <AuthStack.Screen
         name="SignIn"
         options={{ headerShown: false }}
         component={SignInScreen}
       />
-    </LoginStack.Navigator>
+    </AuthStack.Navigator>
   );
 };
-
-const UserNav: React.FunctionComponent = () => {
+const AppNav: React.FunctionComponent = () => {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={HomeScreen} />
@@ -35,8 +38,21 @@ const UserNav: React.FunctionComponent = () => {
 };
 
 const Root: React.FunctionComponent = () => {
-  const authContext = useContext(AuthContext);
-  return <>{authContext.token ? <UserNav /> : <LoginNav />}</>;
+  return (
+    <RootStack.Navigator mode="modal" initialRouteName="ResolveAuth">
+      <RootStack.Screen
+        name="ResolveAuth"
+        options={{ headerShown: false }}
+        component={ResolveAuthScreen}
+      />
+      <RootStack.Screen
+        name="Auth"
+        options={{ headerShown: false }}
+        component={AuthNav}
+      />
+      <RootStack.Screen name="App" component={AppNav} />
+    </RootStack.Navigator>
+  );
 };
 
 export default Root;

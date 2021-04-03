@@ -1,13 +1,22 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useReducer } from "react";
+import { authApi } from "../api";
+import { secureStorage, navigationRef } from "../utils";
 
 type AuthState = {
   token: string | null;
+  errorMsg?: string;
+};
+
+type ContextProviderProps = {
+  state: AuthState;
 };
 
 enum AuthActionType {
   restore = "RESTORE_TOKEN",
   signIn = "SIGN_IN",
   signOut = "SIGN_OUT",
+  error = "ERROR",
 }
 
 type AuthAction = {
@@ -15,29 +24,107 @@ type AuthAction = {
   payload?: AuthState;
 };
 
-const defaultValue: AuthState = {
-  token: null,
-};
-
-const authReducer = (state: AuthState, action: AuthAction) => {
+const authReducer = (state: AuthState, action: AuthAction): AuthState => {
   switch (action.type) {
     case "RESTORE_TOKEN":
-      return { token: "", ...state };
+      return { ...state, token: action.payload!.token };
     case "SIGN_IN":
-      return { token: "", ...state };
+      return { ...state, token: action.payload!.token };
     case "SIGN_OUT":
-      return { token: null, ...state };
+      return { ...state, token: null };
+    case "ERROR":
+      return { token: null, errorMsg: action.payload?.errorMsg };
     default:
       return { ...state };
   }
 };
 
-const AuthContext = React.createContext(defaultValue);
+const signIn = (dispatch: React.Dispatch<AuthAction>) => {
+  return async (authIdp: string) => {
+    try {
+      const oauthResultCode = await authApi.handleOAuth(authIdp);
+      const result = await authApi.getAuthToken(oauthResultCode);
 
-const AuthContextProvider: React.FunctionComponent = ({ children }) => {
-  const [state] = useReducer(authReducer, defaultValue);
+      await secureStorage.save("token", result.authToken);
 
-  return <AuthContext.Provider value={state}>{children}</AuthContext.Provider>;
+      dispatch({
+        type: AuthActionType.signIn,
+        payload: { token: result.authToken },
+      });
+      navigationRef.resetRoot("App");
+    } catch (e) {
+      dispatch({
+        type: AuthActionType.error,
+        payload: { token: null, errorMsg: e },
+      });
+    }
+  };
+};
+
+const restoreToken = (dispatch: React.Dispatch<AuthAction>) => {
+  return async () => {
+    try {
+      const authToken = await secureStorage.getValue("token");
+
+      if (authToken === null) {
+        navigationRef.resetRoot("Auth");
+      }
+
+      if (authToken) {
+        dispatch({
+          type: AuthActionType.restore,
+          payload: { token: authToken },
+        });
+        navigationRef.resetRoot("App");
+      }
+    } catch (e) {
+      dispatch({
+        type: AuthActionType.error,
+        payload: { token: null, errorMsg: e },
+      });
+    }
+  };
+};
+
+const signOut = (dispatch: React.Dispatch<AuthAction>) => {
+  return async () => {
+    try {
+      await secureStorage.removeValue("token");
+
+      dispatch({ type: AuthActionType.signOut });
+
+      navigationRef.resetRoot("Auth");
+    } catch (e) {
+      dispatch({
+        type: AuthActionType.error,
+        payload: { token: null, errorMsg: e },
+      });
+    }
+  };
+};
+
+const defaultAuthState: AuthState = { token: null };
+
+const defaultContextProviderProps: ContextProviderProps = {
+  state: defaultAuthState,
+};
+
+const AuthContext = React.createContext(defaultContextProviderProps);
+
+const AuthContextProvider: React.FC = ({ children }) => {
+  const [state, dispatch] = useReducer(authReducer, defaultAuthState);
+
+  const boundActions = {
+    signIn: signIn(dispatch),
+    restoreToken: restoreToken(dispatch),
+    signOut: signOut(dispatch),
+  };
+
+  return (
+    <AuthContext.Provider value={{ state, ...boundActions }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export { AuthContext, AuthContextProvider };
