@@ -67,7 +67,7 @@ const restoreToken = (dispatch: React.Dispatch<AuthAction>) => {
       const authToken = await secureStorage.getValue("token");
 
       if (authToken === null) {
-        navigationRef.resetRoot("SignIn");
+        navigationRef.resetRoot("Auth");
       }
 
       if (authToken) {
@@ -77,6 +77,23 @@ const restoreToken = (dispatch: React.Dispatch<AuthAction>) => {
         });
         navigationRef.resetRoot("App");
       }
+    } catch (e) {
+      dispatch({
+        type: AuthActionType.error,
+        payload: { token: null, errorMsg: e },
+      });
+    }
+  };
+};
+
+const signOut = (dispatch: React.Dispatch<AuthAction>) => {
+  return async () => {
+    try {
+      await secureStorage.removeValue("token");
+
+      dispatch({ type: AuthActionType.signOut });
+
+      navigationRef.resetRoot("Auth");
     } catch (e) {
       dispatch({
         type: AuthActionType.error,
@@ -100,6 +117,7 @@ const AuthContextProvider: React.FC = ({ children }) => {
   const boundActions = {
     signIn: signIn(dispatch),
     restoreToken: restoreToken(dispatch),
+    signOut: signOut(dispatch),
   };
 
   return (
