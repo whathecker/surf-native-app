@@ -50,7 +50,7 @@ const signIn = (dispatch: React.Dispatch<AuthAction>) => {
         type: AuthActionType.signIn,
         payload: { token: result.authToken },
       });
-      navigationRef.navigate("SignUp");
+      navigationRef.navigate("App");
     } catch (e) {
       dispatch({
         type: AuthActionType.error,
@@ -74,7 +74,7 @@ const restoreToken = (dispatch: React.Dispatch<AuthAction>) => {
           type: AuthActionType.restore,
           payload: { token: authToken },
         });
-        navigationRef.navigate("Home");
+        navigationRef.navigate("App");
       }
     } catch (e) {
       dispatch({
