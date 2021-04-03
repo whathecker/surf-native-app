@@ -22,4 +22,11 @@ const navigate = (
   );
 };
 
-export default { setNavigator, navigate };
+const resetRoot = (routeName: string): void => {
+  navigator!.resetRoot({
+    index: 0,
+    routes: [{ name: routeName }],
+  });
+};
+
+export default { setNavigator, navigate, resetRoot };

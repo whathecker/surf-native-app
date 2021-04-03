@@ -51,7 +51,7 @@ const signIn = (dispatch: React.Dispatch<AuthAction>) => {
         type: AuthActionType.signIn,
         payload: { token: result.authToken },
       });
-      navigationRef.navigate("App");
+      navigationRef.resetRoot("App");
     } catch (e) {
       dispatch({
         type: AuthActionType.error,
@@ -67,7 +67,7 @@ const restoreToken = (dispatch: React.Dispatch<AuthAction>) => {
       const authToken = await secureStorage.getValue("token");
 
       if (authToken === null) {
-        navigationRef.navigate("SignIn");
+        navigationRef.resetRoot("SignIn");
       }
 
       if (authToken) {
@@ -75,7 +75,7 @@ const restoreToken = (dispatch: React.Dispatch<AuthAction>) => {
           type: AuthActionType.restore,
           payload: { token: authToken },
         });
-        navigationRef.navigate("App");
+        navigationRef.resetRoot("App");
       }
     } catch (e) {
       dispatch({
