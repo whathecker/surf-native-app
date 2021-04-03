@@ -1,12 +1,12 @@
 import * as React from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { LoginStackParamList } from "../types/route-params";
-
-import { View, Text, Image, Platform, StyleSheet } from "react-native";
+import { AuthStackParamList } from "../types/route-params";
+import { View, Text, Image, StyleSheet } from "react-native";
 import { Typography, Icon, Container } from "../styles";
 import { AuthButton } from "../components";
+import { shouldDisplayAppleSignin } from "../utils";
 
-type SignUpScreenNavProp = StackNavigationProp<LoginStackParamList, "SignUp">;
+type SignUpScreenNavProp = StackNavigationProp<AuthStackParamList, "SignUp">;
 type Props = { navigation: SignUpScreenNavProp };
 
 const SignUpScreen: React.FunctionComponent<Props> = ({
@@ -32,7 +32,7 @@ const SignUpScreen: React.FunctionComponent<Props> = ({
         </View>
       </View>
       <View style={styles.authButtonsWrapper}>
-        {Platform.OS === "ios" ? (
+        {shouldDisplayAppleSignin() ? (
           <View style={styles.btnInnerWrapper}>
             <AuthButton authBrand="apple" screenType="signup" />
           </View>

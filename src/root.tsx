@@ -39,11 +39,7 @@ const AppNav: React.FunctionComponent = () => {
 
 const Root: React.FunctionComponent = () => {
   return (
-    <RootStack.Navigator
-      headerMode="none"
-      mode="modal"
-      initialRouteName="ResolveAuth"
-    >
+    <RootStack.Navigator mode="modal" initialRouteName="ResolveAuth">
       <RootStack.Screen
         name="ResolveAuth"
         options={{ headerShown: false }}
