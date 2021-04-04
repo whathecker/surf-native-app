@@ -4,6 +4,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { SurfLevelQuestionsStackParamList } from "../types/route-params";
 import { View, Text, StyleSheet } from "react-native";
 import { Typography, Container } from "../styles";
+import { SurfLevelButton } from "../components";
 
 type SurfLevelScreenNavProp = StackNavigationProp<
   SurfLevelQuestionsStackParamList,
@@ -19,16 +20,16 @@ const SurfLevelScreen: React.FC<Props> = ({ navigation }: Props) => {
       </View>
       <View style={styles.surfLevelOptionsWrapper}>
         <View style={styles.buttonWrapper}>
-          <Text>{"Beginner Button"}</Text>
+          <SurfLevelButton />
         </View>
         <View style={styles.buttonWrapper}>
-          <Text>{"Beginner Button"}</Text>
+          <SurfLevelButton />
         </View>
         <View style={styles.buttonWrapper}>
-          <Text>{"Beginner Button"}</Text>
+          <SurfLevelButton />
         </View>
         <View style={styles.buttonWrapper}>
-          <Text>{"Beginner Button"}</Text>
+          <SurfLevelButton />
         </View>
       </View>
       <View style={styles.nextStepButtonWrapper}>
@@ -52,8 +53,9 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     ...Container.centerAlignedContainer,
-    paddingTop: 20,
-    paddingBottom: 20,
+    width: "70%",
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   nextStepButtonWrapper: {
     ...Container.centerAlignedContainer,
