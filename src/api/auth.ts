@@ -25,7 +25,7 @@ const handleOAuth = async (idp: string): Promise<string> => {
     } else {
       return Promise.reject("login failed");
     }
-  } catch (e) {
+  } catch (error) {
     return Promise.reject("error during login");
   }
 };
@@ -33,7 +33,7 @@ const handleOAuth = async (idp: string): Promise<string> => {
 const getAuthToken = async (authcode: string): Promise<AuthToken> => {
   try {
     return Promise.resolve({ authToken: authcode + "_success_token" });
-  } catch (e) {
+  } catch (error) {
     return Promise.reject("error");
   }
 };
