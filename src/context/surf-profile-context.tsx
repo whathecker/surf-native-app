@@ -41,14 +41,14 @@ const surfProfileReducer = (
 const fetchSurfProfile = (dispatch: React.Dispatch<SurfProfileAction>) => {
   return async () => {
     try {
-      const surfProfile = await surfProfileApi.getSurfProfile(true);
+      const surfProfile = await surfProfileApi.getSurfProfile(false);
       dispatch({
         type: SurfProfileActionType.fetch,
         payload: { surfProfile },
       });
 
       if (surfProfile.surfLevelScore === null) {
-        console.log("Send User to Surf Question Screen");
+        navigationRef.resetRoot("SurfProfileQuestions");
       }
 
       if (surfProfile.surfLevelScore !== null) {

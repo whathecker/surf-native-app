@@ -8,11 +8,13 @@ import {
   SignInScreen,
   ResolveAuthScreen,
   PostAuthScreen,
+  SurfLevelScreen,
 } from "./screens";
 
 const RootStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const AuthStack = createStackNavigator<AuthStackParamList>();
+const SurfProfileQuestionsStack = createStackNavigator();
 
 const AuthNav: React.FunctionComponent = () => {
   return (
@@ -30,6 +32,19 @@ const AuthNav: React.FunctionComponent = () => {
     </AuthStack.Navigator>
   );
 };
+
+const SurfProfileQuestionsNav: React.FunctionComponent = () => {
+  return (
+    <SurfProfileQuestionsStack.Navigator>
+      <SurfProfileQuestionsStack.Screen
+        name="SurfLevel"
+        options={{ headerShown: false }}
+        component={SurfLevelScreen}
+      />
+    </SurfProfileQuestionsStack.Navigator>
+  );
+};
+
 const AppNav: React.FunctionComponent = () => {
   return (
     <Tab.Navigator>
@@ -55,6 +70,11 @@ const Root: React.FunctionComponent = () => {
         name="PostAuth"
         options={{ headerShown: false }}
         component={PostAuthScreen}
+      />
+      <RootStack.Screen
+        name="SurfProfileQuestions"
+        options={{ headerShown: false }}
+        component={SurfProfileQuestionsNav}
       />
       <RootStack.Screen name="App" component={AppNav} />
     </RootStack.Navigator>
