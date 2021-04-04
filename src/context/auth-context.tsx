@@ -51,11 +51,11 @@ const signIn = (dispatch: React.Dispatch<AuthAction>) => {
         type: AuthActionType.signIn,
         payload: { token: result.authToken },
       });
-      navigationRef.resetRoot("App");
-    } catch (e) {
+      navigationRef.resetRoot("PostAuth");
+    } catch (error) {
       dispatch({
         type: AuthActionType.error,
-        payload: { token: null, errorMsg: e },
+        payload: { token: null, errorMsg: error },
       });
     }
   };
@@ -75,12 +75,12 @@ const restoreToken = (dispatch: React.Dispatch<AuthAction>) => {
           type: AuthActionType.restore,
           payload: { token: authToken },
         });
-        navigationRef.resetRoot("App");
+        navigationRef.resetRoot("PostAuth");
       }
-    } catch (e) {
+    } catch (error) {
       dispatch({
         type: AuthActionType.error,
-        payload: { token: null, errorMsg: e },
+        payload: { token: null, errorMsg: error },
       });
     }
   };
@@ -94,10 +94,10 @@ const signOut = (dispatch: React.Dispatch<AuthAction>) => {
       dispatch({ type: AuthActionType.signOut });
 
       navigationRef.resetRoot("Auth");
-    } catch (e) {
+    } catch (error) {
       dispatch({
         type: AuthActionType.error,
-        payload: { token: null, errorMsg: e },
+        payload: { token: null, errorMsg: error },
       });
     }
   };

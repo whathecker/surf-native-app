@@ -1,11 +1,15 @@
-const isProfileExist = async (
-  userId: string,
-): Promise<Record<string, string>> => {
+const getSurfProfile = async (
+  expectedResult: boolean,
+): Promise<Record<string, string | number | null>> => {
   try {
-    return Promise.resolve({ result: "profile_exist", userId });
+    if (expectedResult) {
+      return Promise.resolve({ surfLevelScore: 50 });
+    } else {
+      return Promise.resolve({ surfLevelScore: null });
+    }
   } catch (error) {
     return Promise.reject("error");
   }
 };
 
-export default { isProfileExist };
+export default { getSurfProfile };
