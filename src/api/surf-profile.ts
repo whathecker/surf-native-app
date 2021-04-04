@@ -1,6 +1,8 @@
+import { SurfProfile } from "../types/surf-profile";
+
 const getSurfProfile = async (
   expectedResult: boolean,
-): Promise<Record<string, string | number | null>> => {
+): Promise<SurfProfile> => {
   try {
     if (expectedResult) {
       return Promise.resolve({ surfLevelScore: 50 });

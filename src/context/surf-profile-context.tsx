@@ -2,10 +2,11 @@
 /* eslint-disable no-console  */
 import React, { useReducer } from "react";
 import { surfProfileApi } from "../api";
+import { SurfProfile } from "../types/surf-profile";
 import { navigationRef } from "../utils";
 
 type SurfProfileState = {
-  surfLevelScore?: number | null;
+  surfProfile?: SurfProfile;
   errorMsg?: string;
 };
 
@@ -43,7 +44,7 @@ const fetchSurfProfile = (dispatch: React.Dispatch<SurfProfileAction>) => {
       const surfProfile = await surfProfileApi.getSurfProfile(true);
       dispatch({
         type: SurfProfileActionType.fetch,
-        payload: { ...surfProfile },
+        payload: { surfProfile },
       });
 
       if (surfProfile.surfLevelScore === null) {
@@ -62,7 +63,9 @@ const fetchSurfProfile = (dispatch: React.Dispatch<SurfProfileAction>) => {
   };
 };
 
-const defaultSurfProfileState: SurfProfileState = { surfLevelScore: null };
+const defaultSurfProfileState: SurfProfileState = {
+  surfProfile: { surfLevelScore: null },
+};
 
 const defaultContextProviderProps: ContextProviderProps = {
   state: defaultSurfProfileState,
