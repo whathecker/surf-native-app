@@ -7,6 +7,7 @@ import {
   SignUpScreen,
   SignInScreen,
   ResolveAuthScreen,
+  PostAuthScreen,
 } from "./screens";
 
 const RootStack = createStackNavigator();
@@ -49,6 +50,11 @@ const Root: React.FunctionComponent = () => {
         name="Auth"
         options={{ headerShown: false }}
         component={AuthNav}
+      />
+      <RootStack.Screen
+        name="PostAuth"
+        options={{ headerShown: false }}
+        component={PostAuthScreen}
       />
       <RootStack.Screen name="App" component={AppNav} />
     </RootStack.Navigator>
