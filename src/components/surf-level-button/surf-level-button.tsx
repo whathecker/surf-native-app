@@ -6,9 +6,16 @@ import { capitalizeFirstChar } from "../../utils";
 
 const SurfLevelButton: React.FC<SurfLevelButtonProps> = ({
   surfLevel,
+  selectedSurfLevel,
 }: SurfLevelButtonProps) => {
   return (
-    <TouchableOpacity style={styles.surfLevelButton}>
+    <TouchableOpacity
+      style={
+        isButtonSelected(surfLevel, selectedSurfLevel)
+          ? styles.activeSurfLevelButton
+          : styles.inactiveSurfLevelButton
+      }
+    >
       <Text style={styles.buttonText}>
         {capitalizeFirstChar(renderSurfLevelBtnText(surfLevel))}
       </Text>
@@ -24,17 +31,35 @@ const renderSurfLevelBtnText = (surfLevel: string): string => {
   return result;
 };
 
+const isButtonSelected = (
+  surfLevel: string,
+  selectedSurfLevel: string | null,
+): boolean => {
+  return surfLevel === selectedSurfLevel;
+};
+
+const surfLevelButtonStyle = {
+  ...Container.centerAlignedContainer,
+  width: "100%",
+  paddingTop: 18,
+  paddingBottom: 18,
+  borderRadius: 12,
+};
+
 const styles = StyleSheet.create({
-  surfLevelButton: {
-    ...Container.centerAlignedContainer,
-    width: "100%",
+  inactiveSurfLevelButton: {
+    ...surfLevelButtonStyle,
     backgroundColor: "white",
     borderStyle: "solid",
     borderWidth: 1,
     borderColor: "black",
-    paddingTop: 18,
-    paddingBottom: 18,
-    borderRadius: 12,
+  },
+  activeSurfLevelButton: {
+    ...surfLevelButtonStyle,
+    backgroundColor: "white",
+    borderStyle: "solid",
+    borderWidth: 2,
+    borderColor: "blue",
   },
   buttonText: {
     ...Typography.p,

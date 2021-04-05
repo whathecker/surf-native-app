@@ -1,6 +1,170 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test SurfLevelButton should renders surf level button for advanced level correctly 1`] = `
+exports[`Test SurfLevelButton - active state should renders active surf level button for advanced level correctly 1`] = `
+<View
+  accessible={true}
+  focusable={false}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "white",
+      "borderColor": "blue",
+      "borderRadius": 12,
+      "borderStyle": "solid",
+      "borderWidth": 2,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "opacity": 1,
+      "paddingBottom": 18,
+      "paddingTop": 18,
+      "width": "100%",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "black",
+        "fontSize": 16,
+      }
+    }
+  >
+    Advanced
+  </Text>
+</View>
+`;
+
+exports[`Test SurfLevelButton - active state should renders active surf level button for beginner level correctly 1`] = `
+<View
+  accessible={true}
+  focusable={false}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "white",
+      "borderColor": "blue",
+      "borderRadius": 12,
+      "borderStyle": "solid",
+      "borderWidth": 2,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "opacity": 1,
+      "paddingBottom": 18,
+      "paddingTop": 18,
+      "width": "100%",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "black",
+        "fontSize": 16,
+      }
+    }
+  >
+    Beginner
+  </Text>
+</View>
+`;
+
+exports[`Test SurfLevelButton - active state should renders active surf level button for intermediate level correctly 1`] = `
+<View
+  accessible={true}
+  focusable={false}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "white",
+      "borderColor": "blue",
+      "borderRadius": 12,
+      "borderStyle": "solid",
+      "borderWidth": 2,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "opacity": 1,
+      "paddingBottom": 18,
+      "paddingTop": 18,
+      "width": "100%",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "black",
+        "fontSize": 16,
+      }
+    }
+  >
+    Intermediate
+  </Text>
+</View>
+`;
+
+exports[`Test SurfLevelButton - active state should renders active surf level button for novice level correctly 1`] = `
+<View
+  accessible={true}
+  focusable={false}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "white",
+      "borderColor": "blue",
+      "borderRadius": 12,
+      "borderStyle": "solid",
+      "borderWidth": 2,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "opacity": 1,
+      "paddingBottom": 18,
+      "paddingTop": 18,
+      "width": "100%",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "black",
+        "fontSize": 16,
+      }
+    }
+  >
+    I've never surfed before
+  </Text>
+</View>
+`;
+
+exports[`Test SurfLevelButton - inactive state should renders inactive surf level button for advanced level correctly 1`] = `
 <View
   accessible={true}
   focusable={false}
@@ -41,7 +205,7 @@ exports[`Test SurfLevelButton should renders surf level button for advanced leve
 </View>
 `;
 
-exports[`Test SurfLevelButton should renders surf level button for beginner level correctly 1`] = `
+exports[`Test SurfLevelButton - inactive state should renders inactive surf level button for beginner level correctly 1`] = `
 <View
   accessible={true}
   focusable={false}
@@ -82,7 +246,7 @@ exports[`Test SurfLevelButton should renders surf level button for beginner leve
 </View>
 `;
 
-exports[`Test SurfLevelButton should renders surf level button for intermediate level correctly 1`] = `
+exports[`Test SurfLevelButton - inactive state should renders inactive surf level button for intermediate level correctly 1`] = `
 <View
   accessible={true}
   focusable={false}
@@ -123,7 +287,7 @@ exports[`Test SurfLevelButton should renders surf level button for intermediate 
 </View>
 `;
 
-exports[`Test SurfLevelButton should renders surf level button for novice level correctly 1`] = `
+exports[`Test SurfLevelButton - inactive state should renders inactive surf level button for novice level correctly 1`] = `
 <View
   accessible={true}
   focusable={false}

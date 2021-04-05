@@ -44,7 +44,7 @@ const SurfLevelScreen: React.FC<Props> = ({ navigation }: Props) => {
   const renderSurfLevelButton = ({ item }: RenderFuncProps) => {
     return (
       <View style={styles.buttonWrapper}>
-        <SurfLevelButton surfLevel={item.value} />
+        <SurfLevelButton surfLevel={item.value} selectedSurfLevel={"novice"} />
       </View>
     );
   };
