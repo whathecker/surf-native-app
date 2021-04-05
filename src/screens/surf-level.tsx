@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-console */
 import * as React from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SurfLevelQuestionsStackParamList } from "../types/route-params";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
 import { Typography, Container } from "../styles";
 import { SurfLevelButton } from "../components";
 
@@ -33,7 +34,13 @@ const SurfLevelScreen: React.FC<Props> = ({ navigation }: Props) => {
         </View>
       </View>
       <View style={styles.nextStepButtonWrapper}>
-        <Text>{"Next step button"}</Text>
+        <Button
+          title="Next"
+          color="blue"
+          onPress={() => {
+            console.log("button clicked");
+          }}
+        />
       </View>
     </>
   );
