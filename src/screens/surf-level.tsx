@@ -79,9 +79,11 @@ const SurfLevelScreen: React.FC<Props> = ({ navigation }: Props) => {
         <Button
           title="Next"
           color="blue"
-          disabled={(selectedLevel === null)}
+          disabled={selectedLevel === null}
           onPress={() => {
-            console.log("button clicked");
+            navigation.navigate("SurfLevelQuestions", {
+              selectedLevel: selectedLevel,
+            });
           }}
         />
       </View>

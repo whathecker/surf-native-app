@@ -9,6 +9,7 @@ import {
   ResolveAuthScreen,
   PostAuthScreen,
   SurfLevelScreen,
+  SurfLevelQuestionsScreen,
 } from "./screens";
 
 const RootStack = createStackNavigator();
@@ -40,6 +41,11 @@ const SurfProfileQuestionsNav: React.FunctionComponent = () => {
         name="SurfLevel"
         options={{ headerShown: false }}
         component={SurfLevelScreen}
+      />
+      <SurfProfileQuestionsStack.Screen
+        name="SurfLevelQuestions"
+        options={{ headerShown: false }}
+        component={SurfLevelQuestionsScreen}
       />
     </SurfProfileQuestionsStack.Navigator>
   );
