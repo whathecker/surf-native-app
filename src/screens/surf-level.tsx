@@ -79,7 +79,7 @@ const SurfLevelScreen: React.FC<Props> = ({ navigation }: Props) => {
         <Button
           title="Next"
           color="blue"
-          disabled={true}
+          disabled={(selectedLevel === null)}
           onPress={() => {
             console.log("button clicked");
           }}
