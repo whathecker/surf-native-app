@@ -3,7 +3,8 @@
 import * as React from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SurfLevelQuestionsStackParamList } from "../types/route-params";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { SurfLevel } from "../types/surf-profile";
+import { View, Text, FlatList, Button, StyleSheet } from "react-native";
 import { Typography, Container } from "../styles";
 import { SurfLevelButton } from "../components";
 
@@ -13,25 +14,52 @@ type SurfLevelScreenNavProp = StackNavigationProp<
 >;
 type Props = { navigation: SurfLevelScreenNavProp };
 
+type SurfLevelData = {
+  key: string;
+  value: SurfLevel;
+};
+
+type RenderFuncProps = { item: SurfLevelData };
+
 const SurfLevelScreen: React.FC<Props> = ({ navigation }: Props) => {
+  const surfLevels: SurfLevelData[] = [
+    {
+      key: "0",
+      value: "novice",
+    },
+    {
+      key: "1",
+      value: "beginner",
+    },
+    {
+      key: "2",
+      value: "intermediate",
+    },
+    {
+      key: "3",
+      value: "advanced",
+    },
+  ];
+
+  const renderSurfLevelButton = ({ item }: RenderFuncProps) => {
+    return (
+      <View style={styles.buttonWrapper}>
+        <SurfLevelButton surfLevel={item.value} />
+      </View>
+    );
+  };
+
   return (
     <>
       <View style={styles.headerWrapper}>
         <Text style={styles.headerText}>{"Tell us about your surf level"}</Text>
       </View>
       <View style={styles.surfLevelOptionsWrapper}>
-        <View style={styles.buttonWrapper}>
-          <SurfLevelButton />
-        </View>
-        <View style={styles.buttonWrapper}>
-          <SurfLevelButton />
-        </View>
-        <View style={styles.buttonWrapper}>
-          <SurfLevelButton />
-        </View>
-        <View style={styles.buttonWrapper}>
-          <SurfLevelButton />
-        </View>
+        <FlatList
+          data={surfLevels}
+          renderItem={renderSurfLevelButton}
+          keyExtractor={(item) => item.key}
+        />
       </View>
       <View style={styles.nextStepButtonWrapper}>
         <Button
@@ -59,8 +87,7 @@ const styles = StyleSheet.create({
     paddingTop: "2.5%",
   },
   buttonWrapper: {
-    ...Container.centerAlignedContainer,
-    width: "70%",
+    width: "100%",
     paddingTop: 10,
     paddingBottom: 10,
   },
