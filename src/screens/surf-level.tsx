@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
-import * as React from "react";
+import React, { useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { SurfLevelQuestionsStackParamList } from "../types/route-params";
-import { SurfLevel } from "../types/surf-profile";
+import { SurfLevel, SelectedSurfLevel } from "../types/surf-profile";
 import { View, Text, FlatList, Button, StyleSheet } from "react-native";
 import { Typography, Container } from "../styles";
 import { SurfLevelButton } from "../components";
@@ -22,6 +22,8 @@ type SurfLevelData = {
 type RenderFuncProps = { item: SurfLevelData };
 
 const SurfLevelScreen: React.FC<Props> = ({ navigation }: Props) => {
+  const [selectedLevel, setSelectedLevel] = useState<SelectedSurfLevel>(null);
+
   const surfLevels: SurfLevelData[] = [
     {
       key: "0",
@@ -41,10 +43,22 @@ const SurfLevelScreen: React.FC<Props> = ({ navigation }: Props) => {
     },
   ];
 
+  const updateSelectedLevel = (
+    setSelectedLevel: React.Dispatch<React.SetStateAction<SelectedSurfLevel>>,
+  ) => {
+    return (selectedLevel: SelectedSurfLevel): void => {
+      setSelectedLevel(selectedLevel);
+    };
+  };
+
   const renderSurfLevelButton = ({ item }: RenderFuncProps) => {
     return (
       <View style={styles.buttonWrapper}>
-        <SurfLevelButton surfLevel={item.value} selectedSurfLevel={"novice"} />
+        <SurfLevelButton
+          handleButtonPress={updateSelectedLevel(setSelectedLevel)}
+          surfLevel={item.value}
+          selectedSurfLevel={selectedLevel}
+        />
       </View>
     );
   };
@@ -65,6 +79,7 @@ const SurfLevelScreen: React.FC<Props> = ({ navigation }: Props) => {
         <Button
           title="Next"
           color="blue"
+          disabled={true}
           onPress={() => {
             console.log("button clicked");
           }}

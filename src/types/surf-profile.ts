@@ -3,3 +3,5 @@ export type SurfProfile = {
 };
 
 export type SurfLevel = "novice" | "beginner" | "intermediate" | "advanced";
+
+export type SelectedSurfLevel = SurfLevel | null;

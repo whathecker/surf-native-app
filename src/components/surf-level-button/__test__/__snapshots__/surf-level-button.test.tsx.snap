@@ -3,7 +3,7 @@
 exports[`Test SurfLevelButton - active state should renders active surf level button for advanced level correctly 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -44,7 +44,7 @@ exports[`Test SurfLevelButton - active state should renders active surf level bu
 exports[`Test SurfLevelButton - active state should renders active surf level button for beginner level correctly 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -85,7 +85,7 @@ exports[`Test SurfLevelButton - active state should renders active surf level bu
 exports[`Test SurfLevelButton - active state should renders active surf level button for intermediate level correctly 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -126,7 +126,7 @@ exports[`Test SurfLevelButton - active state should renders active surf level bu
 exports[`Test SurfLevelButton - active state should renders active surf level button for novice level correctly 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -167,7 +167,7 @@ exports[`Test SurfLevelButton - active state should renders active surf level bu
 exports[`Test SurfLevelButton - inactive state should renders inactive surf level button for advanced level correctly 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -208,7 +208,7 @@ exports[`Test SurfLevelButton - inactive state should renders inactive surf leve
 exports[`Test SurfLevelButton - inactive state should renders inactive surf level button for beginner level correctly 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -249,7 +249,7 @@ exports[`Test SurfLevelButton - inactive state should renders inactive surf leve
 exports[`Test SurfLevelButton - inactive state should renders inactive surf level button for intermediate level correctly 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -290,7 +290,7 @@ exports[`Test SurfLevelButton - inactive state should renders inactive surf leve
 exports[`Test SurfLevelButton - inactive state should renders inactive surf level button for novice level correctly 1`] = `
 <View
   accessible={true}
-  focusable={false}
+  focusable={true}
   onClick={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}

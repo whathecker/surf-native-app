@@ -1,6 +1,9 @@
-import { SurfLevel } from "../../../types/surf-profile";
+import { SurfLevel, SelectedSurfLevel } from "../../../types/surf-profile";
+
+export type SetSelectedLevelFunc = (input: SurfLevel | null) => void;
 
 export type SurfLevelButtonProps = {
   surfLevel: SurfLevel;
-  selectedSurfLevel: SurfLevel | null;
+  selectedSurfLevel: SelectedSurfLevel;
+  handleButtonPress: (input: SelectedSurfLevel) => void;
 };

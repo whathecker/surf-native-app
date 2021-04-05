@@ -7,9 +7,13 @@ import { capitalizeFirstChar } from "../../utils";
 const SurfLevelButton: React.FC<SurfLevelButtonProps> = ({
   surfLevel,
   selectedSurfLevel,
+  handleButtonPress,
 }: SurfLevelButtonProps) => {
   return (
     <TouchableOpacity
+      onPress={() => {
+        handleButtonPress(surfLevel);
+      }}
       style={
         isButtonSelected(surfLevel, selectedSurfLevel)
           ? styles.activeSurfLevelButton
