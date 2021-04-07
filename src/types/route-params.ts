@@ -5,7 +5,51 @@ export type AuthStackParamList = {
   SignIn: undefined;
 };
 
+type AnswerOption = {
+  key: number;
+  option: string;
+};
+
+export type SurfLevelQuestion = {
+  question: string;
+  options: AnswerOption[];
+  answer: number | null;
+};
+
+export type SurfLevelQuestionsHolder = {
+  selectedSurfLevel: SelectedSurfLevel;
+  currenctIndex: number;
+  questions: SurfLevelQuestion[] | null;
+};
+
 export type SurfLevelQuestionsStackParamList = {
   SurfLevel: undefined;
-  SurfLevelQuestions: { selectedLevel: SelectedSurfLevel } | undefined;
+  BeginnerLevelQuestionsOne: SurfLevelQuestionsHolder | undefined;
+  BeginnerLevelQuestionsTwo: SurfLevelQuestionsHolder | undefined;
+  BeginnerLevelQuestionsThree: SurfLevelQuestionsHolder | undefined;
+  BeginnerLevelQuestionsFour: SurfLevelQuestionsHolder | undefined;
+  IntermediateLevelQuestionsOne: SurfLevelQuestionsHolder | undefined;
+  IntermediateLevelQuestionsTwo: SurfLevelQuestionsHolder | undefined;
+  IntermediateLevelQuestionsThree: SurfLevelQuestionsHolder | undefined;
+  IntermediateLevelQuestionsFour: SurfLevelQuestionsHolder | undefined;
+  IntermediateLevelQuestionsFive: SurfLevelQuestionsHolder | undefined;
+  AdvancedLevelQuestionsOne: SurfLevelQuestionsHolder | undefined;
+  AdvancedLevelQuestionsTwo: SurfLevelQuestionsHolder | undefined;
+  AdvancedLevelQuestionsThree: SurfLevelQuestionsHolder | undefined;
+  AdvancedLevelQuestionsFour: SurfLevelQuestionsHolder | undefined;
 };
+
+export type SurfLevelQuestionsRouteNames =
+  | "BeginnerLevelQuestionsOne"
+  | "BeginnerLevelQuestionsTwo"
+  | "BeginnerLevelQuestionsThree"
+  | "BeginnerLevelQuestionsFour"
+  | "IntermediateLevelQuestionsOne"
+  | "IntermediateLevelQuestionsTwo"
+  | "IntermediateLevelQuestionsThree"
+  | "IntermediateLevelQuestionsFour"
+  | "IntermediateLevelQuestionsFive"
+  | "AdvancedLevelQuestionsOne"
+  | "AdvancedLevelQuestionsTwo"
+  | "AdvancedLevelQuestionsThree"
+  | "AdvancedLevelQuestionsFour";

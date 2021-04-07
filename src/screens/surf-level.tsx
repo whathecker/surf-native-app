@@ -2,11 +2,19 @@
 /* eslint-disable no-console */
 import React, { useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { SurfLevelQuestionsStackParamList } from "../types/route-params";
+import {
+  SurfLevelQuestionsStackParamList,
+  SurfLevelQuestionsRouteNames,
+} from "../types/route-params";
 import { SurfLevel, SelectedSurfLevel } from "../types/surf-profile";
 import { View, Text, FlatList, Button, StyleSheet } from "react-native";
 import { Typography, Container } from "../styles";
 import { SurfLevelButton } from "../components";
+import {
+  beginnerQuestions,
+  intermediateQuestions,
+  advancedQuestions,
+} from "../data/surf-level-questions";
 
 type SurfLevelScreenNavProp = StackNavigationProp<
   SurfLevelQuestionsStackParamList,
@@ -81,14 +89,46 @@ const SurfLevelScreen: React.FC<Props> = ({ navigation }: Props) => {
           color="blue"
           disabled={selectedLevel === null}
           onPress={() => {
-            navigation.navigate("SurfLevelQuestions", {
-              selectedLevel: selectedLevel,
-            });
+            const nextScreenName = getFirstQuestionScreenName(selectedLevel);
+
+            let questions = null;
+            selectedLevel === "beginner"
+              ? (questions = beginnerQuestions)
+              : null;
+            selectedLevel === "intermediate"
+              ? (questions = intermediateQuestions)
+              : null;
+            selectedLevel === "advanced"
+              ? (questions = advancedQuestions)
+              : null;
+
+            if (nextScreenName) {
+              navigation.navigate(nextScreenName, {
+                selectedSurfLevel: selectedLevel,
+                currenctIndex: 0,
+                questions: questions,
+              });
+            }
           }}
         />
       </View>
     </>
   );
+};
+
+const getFirstQuestionScreenName = (
+  selectedLevel: SelectedSurfLevel,
+): SurfLevelQuestionsRouteNames | null => {
+  switch (selectedLevel) {
+    case "beginner":
+      return "BeginnerLevelQuestionsOne";
+    case "intermediate":
+      return "IntermediateLevelQuestionsOne";
+    case "advanced":
+      return "AdvancedLevelQuestionsOne";
+    default:
+      return null;
+  }
 };
 
 const styles = StyleSheet.create({
