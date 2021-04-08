@@ -32,39 +32,53 @@ const SurfLevelQuestionScreen: React.FC<Props> = ({
   const currentQuestionIndex = route.params?.currenctIndex || 0;
   const selectedLevel = route.params!.selectedSurfLevel;
   const questions = route.params!.questions!;
-  const questionForScreen = questions[currentQuestionIndex];
-  console.log(questionForScreen);
+  const { question, options } = questions[currentQuestionIndex];
 
   return (
     <>
       <View style={styles.wrapper}>
-        <Text style={styles.headerText}>Surf Level Questions Screen</Text>
-        <Text style={styles.headerText}>{`route`}</Text>
-        <Button
-          title="Go Back"
-          color="blue"
-          onPress={() => {
-            navigation.goBack();
-          }}
-        />
-        <Button
-          title="Next"
-          color="blue"
-          onPress={() => {
-            const nextScreenName = findNextQuestionScreenName(
-              selectedLevel,
-              currentQuestionIndex,
-            );
+        <View style={styles.headerWrapper}>
+          <Text style={styles.headerText}>{`${question}?`}</Text>
+        </View>
+        <View style={styles.answerOptionsWrapper}>
+          <View>
+            <Text>{`${options[0].option}`}</Text>
+          </View>
+          <View>
+            <Text>{`${options[1].option}`}</Text>
+          </View>
+          <View>
+            <Text>{`${options[2].option}`}</Text>
+          </View>
+        </View>
+        <View style={styles.buttonWrapper}>
+          <Button
+            title="Go Back"
+            color="blue"
+            onPress={() => {
+              navigation.goBack();
+            }}
+          />
+          <Button
+            title="Next"
+            color="blue"
+            onPress={() => {
+              const nextScreenName = findNextQuestionScreenName(
+                selectedLevel,
+                currentQuestionIndex,
+              );
 
-            if (nextScreenName) {
-              navigation.navigate(nextScreenName, {
-                selectedSurfLevel: selectedLevel,
-                currenctIndex: currentQuestionIndex + 1,
-                questions: questions,
-              });
-            }
-          }}
-        />
+              if (nextScreenName) {
+                navigation.navigate(nextScreenName, {
+                  selectedSurfLevel: selectedLevel,
+                  currenctIndex: currentQuestionIndex + 1,
+                  questions: questions,
+                });
+              }
+            }}
+          />
+        </View>
+        
       </View>
     </>
   );
@@ -136,10 +150,33 @@ const styles = StyleSheet.create({
   wrapper: {
     ...Container.centerAlignedContainerVertical,
     flex: 1,
+    paddingTop: "30%",
+  },
+  headerWrapper: {
+    flex: 1,
+    width: "95%",
+    paddingLeft: "5%",
+    borderColor: "black",
+    borderStyle: "solid",
+    borderWidth: 1,
   },
   headerText: {
     ...Typography.h1,
   },
+  answerOptionsWrapper: {
+    flex: 3,
+    paddingTop: "30%",
+    borderColor: "black",
+    borderStyle: "solid",
+    borderWidth: 1,
+  },
+  buttonWrapper: {
+    flex: 2,
+    paddingTop: "10%",
+    borderColor: "black",
+    borderStyle: "solid",
+    borderWidth: 1,
+  }
 });
 
 export default SurfLevelQuestionScreen;
