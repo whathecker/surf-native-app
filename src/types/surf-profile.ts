@@ -7,14 +7,16 @@ export type SurfLevel = "novice" | "beginner" | "intermediate" | "advanced";
 export type SelectedSurfLevel = SurfLevel | null;
 
 export type SurfLevelAnswerOption = {
-  key: number;
+  key: 0 | 1 | 2;
   option: string;
 };
+
+export type SelectedSurfLevelAnswer = 0 | 1 | 2 | null;
 
 export type SurfLevelQuestion = {
   question: string;
   options: SurfLevelAnswerOption[];
-  answer: number | null;
+  answer: SelectedSurfLevelAnswer;
 };
 
 export type SurfLevelQuestionsHolder = {

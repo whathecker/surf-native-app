@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable no-console */
-import React from "react";
+import React, { useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 import {
@@ -9,7 +8,11 @@ import {
 } from "../types/route-params";
 import { View, Text, Button, FlatList, StyleSheet } from "react-native";
 import { Container, Typography } from "../styles";
-import { SurfLevel, SurfLevelAnswerOption } from "../types/surf-profile";
+import {
+  SurfLevel,
+  SurfLevelAnswerOption,
+  SelectedSurfLevelAnswer,
+} from "../types/surf-profile";
 import { SurfLevelAnswerButton } from "../components";
 
 type SurfLevelQuestionsScreenNavProps = StackNavigationProp<
@@ -34,13 +37,32 @@ const SurfLevelQuestionScreen: React.FC<Props> = ({
 }: Props) => {
   const currentQuestionIndex = route.params?.currenctIndex || 0;
   const selectedLevel = route.params!.selectedSurfLevel;
+
   const questions = route.params!.questions!;
   const { question, options } = questions[currentQuestionIndex];
+
+  const [selectedAnswer, setSelectedAnswer] = useState<SelectedSurfLevelAnswer>(
+    null,
+  );
+
+  const updateSelectedAnswer = (
+    setSelectedAnswer: React.Dispatch<
+      React.SetStateAction<SelectedSurfLevelAnswer>
+    >,
+  ) => {
+    return (selected: SelectedSurfLevelAnswer): void => {
+      setSelectedAnswer(selected);
+    };
+  };
 
   const renderSurfLevelAnswerButton = ({ item }: RenderFuncProps) => {
     return (
       <View style={styles.buttonWrapper}>
-        <SurfLevelAnswerButton answerOption={item} />
+        <SurfLevelAnswerButton
+          answerOption={item}
+          keyOfSelectedAnswer={selectedAnswer}
+          handleButtonPress={updateSelectedAnswer(setSelectedAnswer)}
+        />
       </View>
     );
   };
