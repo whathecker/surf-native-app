@@ -7,9 +7,10 @@ import {
   SurfLevelQuestionsStackParamList,
   SurfLevelQuestionsRouteNames,
 } from "../types/route-params";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, Button, FlatList, StyleSheet } from "react-native";
 import { Container, Typography } from "../styles";
-import { SurfLevel } from "../types/surf-profile";
+import { SurfLevel, SurfLevelAnswerOption } from "../types/surf-profile";
+import { SurfLevelAnswerButton } from "../components";
 
 type SurfLevelQuestionsScreenNavProps = StackNavigationProp<
   SurfLevelQuestionsStackParamList,
@@ -25,6 +26,8 @@ type Props = {
   navigation: SurfLevelQuestionsScreenNavProps;
 };
 
+type RenderFuncProps = { item: SurfLevelAnswerOption };
+
 const SurfLevelQuestionScreen: React.FC<Props> = ({
   route,
   navigation,
@@ -34,6 +37,14 @@ const SurfLevelQuestionScreen: React.FC<Props> = ({
   const questions = route.params!.questions!;
   const { question, options } = questions[currentQuestionIndex];
 
+  const renderSurfLevelAnswerButton = ({ item }: RenderFuncProps) => {
+    return (
+      <View style={styles.buttonWrapper}>
+        <SurfLevelAnswerButton answerOption={item} />
+      </View>
+    );
+  };
+
   return (
     <>
       <View style={styles.wrapper}>
@@ -41,17 +52,13 @@ const SurfLevelQuestionScreen: React.FC<Props> = ({
           <Text style={styles.headerText}>{`${question}?`}</Text>
         </View>
         <View style={styles.answerOptionsWrapper}>
-          <View>
-            <Text>{`${options[0].option}`}</Text>
-          </View>
-          <View>
-            <Text>{`${options[1].option}`}</Text>
-          </View>
-          <View>
-            <Text>{`${options[2].option}`}</Text>
-          </View>
+          <FlatList
+            data={options}
+            renderItem={renderSurfLevelAnswerButton}
+            keyExtractor={(item) => item.key.toString()}
+          />
         </View>
-        <View style={styles.buttonWrapper}>
+        <View style={styles.buttonAreaWrapper}>
           <Button
             title="Go Back"
             color="blue"
@@ -78,7 +85,6 @@ const SurfLevelQuestionScreen: React.FC<Props> = ({
             }}
           />
         </View>
-        
       </View>
     </>
   );
@@ -156,27 +162,27 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "95%",
     paddingLeft: "5%",
-    borderColor: "black",
-    borderStyle: "solid",
-    borderWidth: 1,
   },
   headerText: {
     ...Typography.h1,
   },
   answerOptionsWrapper: {
-    flex: 3,
-    paddingTop: "30%",
-    borderColor: "black",
-    borderStyle: "solid",
-    borderWidth: 1,
+    flex: 4,
+    width: "72%",
+    paddingTop: "18%",
   },
-  buttonWrapper: {
+  buttonAreaWrapper: {
     flex: 2,
     paddingTop: "10%",
     borderColor: "black",
     borderStyle: "solid",
     borderWidth: 1,
-  }
+  },
+  buttonWrapper: {
+    width: "100%",
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
 });
 
 export default SurfLevelQuestionScreen;

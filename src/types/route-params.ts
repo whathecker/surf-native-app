@@ -1,25 +1,8 @@
-import { SelectedSurfLevel } from "./surf-profile";
+import { SurfLevelQuestionsHolder } from "./surf-profile";
 
 export type AuthStackParamList = {
   SignUp: undefined;
   SignIn: undefined;
-};
-
-type AnswerOption = {
-  key: number;
-  option: string;
-};
-
-export type SurfLevelQuestion = {
-  question: string;
-  options: AnswerOption[];
-  answer: number | null;
-};
-
-export type SurfLevelQuestionsHolder = {
-  selectedSurfLevel: SelectedSurfLevel;
-  currenctIndex: number;
-  questions: SurfLevelQuestion[] | null;
 };
 
 export type SurfLevelQuestionsStackParamList = {

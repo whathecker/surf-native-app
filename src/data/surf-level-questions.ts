@@ -1,4 +1,4 @@
-import { SurfLevelQuestion } from "../types/route-params";
+import { SurfLevelQuestion } from "../types/surf-profile";
 
 export const beginnerQuestions: SurfLevelQuestion[] = [
   {
