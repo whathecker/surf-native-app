@@ -6,12 +6,14 @@ export type SurfLevel = "novice" | "beginner" | "intermediate" | "advanced";
 
 export type SelectedSurfLevel = SurfLevel | null;
 
+export type SurfLevelAnswerKey = 0 | 1 | 2;
+
 export type SurfLevelAnswerOption = {
-  key: 0 | 1 | 2;
+  key: SurfLevelAnswerKey;
   option: string;
 };
 
-export type SelectedSurfLevelAnswer = 0 | 1 | 2 | null;
+export type SelectedSurfLevelAnswer = SurfLevelAnswerKey | null;
 
 export type SurfLevelQuestion = {
   question: string;
