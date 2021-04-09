@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
-import { Typography, Container } from "../../styles";
+import { Typography, Button } from "../../styles";
 import { SurfLevelAnswerButtonProps } from "./types";
 
 const SurfLevelAnswerButton: React.FC<SurfLevelAnswerButtonProps> = ({
@@ -31,29 +31,12 @@ const isButtonSelected = (
   return keyOfAnswerOption === keyOfSelectedAnswer;
 };
 
-// TODO: duplicated style declaration, modularize it!
-const surfLevelButtonStyle = {
-  ...Container.centerAlignedContainer,
-  width: "100%",
-  paddingTop: 18,
-  paddingBottom: 18,
-  borderRadius: 12,
-};
-
 const styles = StyleSheet.create({
   inactiveButton: {
-    ...surfLevelButtonStyle,
-    backgroundColor: "white",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderColor: "black",
+    ...Button.inactiveAnswerButton,
   },
   activeButton: {
-    ...surfLevelButtonStyle,
-    backgroundColor: "white",
-    borderStyle: "solid",
-    borderWidth: 2,
-    borderColor: "blue",
+    ...Button.activeAnswerButton,
   },
   buttonText: {
     ...Typography.p,

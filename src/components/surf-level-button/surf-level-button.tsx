@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
-import { Typography, Container } from "../../styles";
+import { Typography, Button } from "../../styles";
 import { SurfLevelButtonProps } from "./types";
 import { capitalizeFirstChar } from "../../utils";
 
@@ -42,28 +42,12 @@ const isButtonSelected = (
   return surfLevel === selectedSurfLevel;
 };
 
-const surfLevelButtonStyle = {
-  ...Container.centerAlignedContainer,
-  width: "100%",
-  paddingTop: 18,
-  paddingBottom: 18,
-  borderRadius: 12,
-};
-
 const styles = StyleSheet.create({
   inactiveSurfLevelButton: {
-    ...surfLevelButtonStyle,
-    backgroundColor: "white",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderColor: "black",
+    ...Button.inactiveAnswerButton,
   },
   activeSurfLevelButton: {
-    ...surfLevelButtonStyle,
-    backgroundColor: "white",
-    borderStyle: "solid",
-    borderWidth: 2,
-    borderColor: "blue",
+    ...Button.activeAnswerButton,
   },
   buttonText: {
     ...Typography.p,
