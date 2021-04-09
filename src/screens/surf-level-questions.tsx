@@ -91,6 +91,7 @@ const SurfLevelQuestionScreen: React.FC<Props> = ({
           <Button
             title="Next"
             color="blue"
+            disabled={selectedAnswer === null}
             onPress={() => {
               const nextScreenName = findNextQuestionScreenName(
                 selectedLevel,
