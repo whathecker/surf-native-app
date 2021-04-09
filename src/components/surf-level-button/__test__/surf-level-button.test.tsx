@@ -1,12 +1,22 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from "react";
 import renderer from "react-test-renderer";
 import SurfLevelButton from "../surf-level-button";
+import { SelectedSurfLevel } from "../../../types/surf-profile";
+
+const mockPressHandler = (_input: SelectedSurfLevel): void => {
+  return;
+};
 
 describe("Test SurfLevelButton - inactive state", () => {
   it("should renders inactive surf level button for novice level correctly", () => {
     const tree = renderer
       .create(
-        <SurfLevelButton selectedSurfLevel="beginner" surfLevel="novice" />,
+        <SurfLevelButton
+          handleButtonPress={mockPressHandler}
+          selectedSurfLevel="beginner"
+          surfLevel="novice"
+        />,
       )
       .toJSON();
 
@@ -16,7 +26,11 @@ describe("Test SurfLevelButton - inactive state", () => {
   it("should renders inactive surf level button for beginner level correctly", () => {
     const tree = renderer
       .create(
-        <SurfLevelButton selectedSurfLevel="novice" surfLevel="beginner" />,
+        <SurfLevelButton
+          handleButtonPress={mockPressHandler}
+          selectedSurfLevel="novice"
+          surfLevel="beginner"
+        />,
       )
       .toJSON();
 
@@ -27,6 +41,7 @@ describe("Test SurfLevelButton - inactive state", () => {
     const tree = renderer
       .create(
         <SurfLevelButton
+          handleButtonPress={mockPressHandler}
           selectedSurfLevel="advanced"
           surfLevel="intermediate"
         />,
@@ -40,6 +55,7 @@ describe("Test SurfLevelButton - inactive state", () => {
     const tree = renderer
       .create(
         <SurfLevelButton
+          handleButtonPress={mockPressHandler}
           selectedSurfLevel="intermediate"
           surfLevel="advanced"
         />,
@@ -53,7 +69,13 @@ describe("Test SurfLevelButton - inactive state", () => {
 describe("Test SurfLevelButton - active state", () => {
   it("should renders active surf level button for novice level correctly", () => {
     const tree = renderer
-      .create(<SurfLevelButton selectedSurfLevel="novice" surfLevel="novice" />)
+      .create(
+        <SurfLevelButton
+          handleButtonPress={mockPressHandler}
+          selectedSurfLevel="novice"
+          surfLevel="novice"
+        />,
+      )
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -62,7 +84,11 @@ describe("Test SurfLevelButton - active state", () => {
   it("should renders active surf level button for beginner level correctly", () => {
     const tree = renderer
       .create(
-        <SurfLevelButton selectedSurfLevel="beginner" surfLevel="beginner" />,
+        <SurfLevelButton
+          handleButtonPress={mockPressHandler}
+          selectedSurfLevel="beginner"
+          surfLevel="beginner"
+        />,
       )
       .toJSON();
 
@@ -73,6 +99,7 @@ describe("Test SurfLevelButton - active state", () => {
     const tree = renderer
       .create(
         <SurfLevelButton
+          handleButtonPress={mockPressHandler}
           selectedSurfLevel="intermediate"
           surfLevel="intermediate"
         />,
@@ -85,7 +112,11 @@ describe("Test SurfLevelButton - active state", () => {
   it("should renders active surf level button for advanced level correctly", () => {
     const tree = renderer
       .create(
-        <SurfLevelButton selectedSurfLevel="advanced" surfLevel="advanced" />,
+        <SurfLevelButton
+          handleButtonPress={mockPressHandler}
+          selectedSurfLevel="advanced"
+          surfLevel="advanced"
+        />,
       )
       .toJSON();
 
