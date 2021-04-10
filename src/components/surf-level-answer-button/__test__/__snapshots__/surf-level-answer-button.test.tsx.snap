@@ -28,7 +28,14 @@ exports[`Test SurfLevelAnswerButton active state should renders active surf leve
     }
   }
 >
-  <Text>
+  <Text
+    style={
+      Object {
+        "color": "black",
+        "fontSize": 16,
+      }
+    }
+  >
     Sometimes when wave is small
   </Text>
 </View>
@@ -62,7 +69,14 @@ exports[`Test SurfLevelAnswerButton inactive state should renders inactive surf 
     }
   }
 >
-  <Text>
+  <Text
+    style={
+      Object {
+        "color": "black",
+        "fontSize": 16,
+      }
+    }
+  >
     Very Confident
   </Text>
 </View>

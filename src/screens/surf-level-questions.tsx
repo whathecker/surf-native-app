@@ -193,12 +193,12 @@ const styles = StyleSheet.create({
   wrapper: {
     ...Container.centerAlignedContainerVertical,
     flex: 1,
-    paddingTop: "30%",
+    paddingTop: "34%",
   },
   headerWrapper: {
     flex: 1,
     width: "95%",
-    paddingLeft: "5%",
+    paddingLeft: "8%",
   },
   headerText: {
     ...Typography.h1,
@@ -211,9 +211,6 @@ const styles = StyleSheet.create({
   buttonAreaWrapper: {
     flex: 2,
     paddingTop: "10%",
-    borderColor: "black",
-    borderStyle: "solid",
-    borderWidth: 1,
   },
   buttonWrapper: {
     width: "100%",

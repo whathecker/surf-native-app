@@ -19,7 +19,7 @@ const SurfLevelAnswerButton: React.FC<SurfLevelAnswerButtonProps> = ({
         handleButtonPress(key);
       }}
     >
-      <Text>{option}</Text>
+      <Text style={styles.buttonText}>{option}</Text>
     </TouchableOpacity>
   );
 };
