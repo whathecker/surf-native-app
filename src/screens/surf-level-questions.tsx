@@ -82,13 +82,6 @@ const SurfLevelQuestionScreen: React.FC<Props> = ({
         </View>
         <View style={styles.buttonAreaWrapper}>
           <Button
-            title="Go Back"
-            color="blue"
-            onPress={() => {
-              navigation.goBack();
-            }}
-          />
-          <Button
             title="Next"
             color="blue"
             disabled={selectedAnswer === null}

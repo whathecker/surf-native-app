@@ -11,6 +11,7 @@ import {
   SurfLevelScreen,
   SurfLevelQuestionsScreen,
 } from "./screens";
+import { GoBackButton } from "./components";
 
 const RootStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,7 +35,16 @@ const AuthNav: React.FunctionComponent = () => {
   );
 };
 
+const GoBackButtonInHeader = () => <GoBackButton />;
+
 const SurfProfileQuestionsNav: React.FunctionComponent = () => {
+  const questionScreenOptions = {
+    title: "",
+    headerStyle: {
+      backgroundColor: "transparent",
+    },
+    headerLeft: GoBackButtonInHeader,
+  };
   return (
     <SurfProfileQuestionsStack.Navigator>
       <SurfProfileQuestionsStack.Screen
@@ -45,69 +55,69 @@ const SurfProfileQuestionsNav: React.FunctionComponent = () => {
 
       <SurfProfileQuestionsStack.Screen
         name="BeginnerLevelQuestionsOne"
-        options={{ headerShown: false }}
+        options={questionScreenOptions}
         component={SurfLevelQuestionsScreen}
       />
       <SurfProfileQuestionsStack.Screen
         name="BeginnerLevelQuestionsTwo"
-        options={{ headerShown: false }}
+        options={questionScreenOptions}
         component={SurfLevelQuestionsScreen}
       />
       <SurfProfileQuestionsStack.Screen
         name="BeginnerLevelQuestionsThree"
-        options={{ headerShown: false }}
+        options={questionScreenOptions}
         component={SurfLevelQuestionsScreen}
       />
       <SurfProfileQuestionsStack.Screen
         name="BeginnerLevelQuestionsFour"
-        options={{ headerShown: false }}
+        options={questionScreenOptions}
         component={SurfLevelQuestionsScreen}
       />
 
       <SurfProfileQuestionsStack.Screen
         name="IntermediateLevelQuestionsOne"
-        options={{ headerShown: false }}
+        options={questionScreenOptions}
         component={SurfLevelQuestionsScreen}
       />
       <SurfProfileQuestionsStack.Screen
         name="IntermediateLevelQuestionsTwo"
-        options={{ headerShown: false }}
+        options={questionScreenOptions}
         component={SurfLevelQuestionsScreen}
       />
       <SurfProfileQuestionsStack.Screen
         name="IntermediateLevelQuestionsThree"
-        options={{ headerShown: false }}
+        options={questionScreenOptions}
         component={SurfLevelQuestionsScreen}
       />
       <SurfProfileQuestionsStack.Screen
         name="IntermediateLevelQuestionsFour"
-        options={{ headerShown: false }}
+        options={questionScreenOptions}
         component={SurfLevelQuestionsScreen}
       />
       <SurfProfileQuestionsStack.Screen
         name="IntermediateLevelQuestionsFive"
-        options={{ headerShown: false }}
+        options={questionScreenOptions}
         component={SurfLevelQuestionsScreen}
       />
 
       <SurfProfileQuestionsStack.Screen
         name="AdvancedLevelQuestionsOne"
-        options={{ headerShown: false }}
+        options={questionScreenOptions}
         component={SurfLevelQuestionsScreen}
       />
       <SurfProfileQuestionsStack.Screen
         name="AdvancedLevelQuestionsTwo"
-        options={{ headerShown: false }}
+        options={questionScreenOptions}
         component={SurfLevelQuestionsScreen}
       />
       <SurfProfileQuestionsStack.Screen
         name="AdvancedLevelQuestionsThree"
-        options={{ headerShown: false }}
+        options={questionScreenOptions}
         component={SurfLevelQuestionsScreen}
       />
       <SurfProfileQuestionsStack.Screen
         name="AdvancedLevelQuestionsFour"
-        options={{ headerShown: false }}
+        options={questionScreenOptions}
         component={SurfLevelQuestionsScreen}
       />
     </SurfProfileQuestionsStack.Navigator>
