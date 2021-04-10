@@ -12,6 +12,7 @@ import {
   SurfLevel,
   SurfLevelAnswerOption,
   SelectedSurfLevelAnswer,
+  SurfLevelQuestion,
 } from "../types/surf-profile";
 import { SurfLevelAnswerButton } from "../components";
 
@@ -91,11 +92,21 @@ const SurfLevelQuestionScreen: React.FC<Props> = ({
                 currentQuestionIndex,
               );
 
+              const updatedQuestion = updateAnswer(
+                currentQuestionIndex,
+                questions,
+                selectedAnswer,
+              );
+
+              if (!nextScreenName) {
+                // TODO: implement data submission
+              }
+
               if (nextScreenName) {
                 navigation.navigate(nextScreenName, {
                   selectedSurfLevel: selectedLevel,
                   currenctIndex: currentQuestionIndex + 1,
-                  questions: questions,
+                  questions: updatedQuestion,
                 });
               }
             }}
@@ -166,6 +177,16 @@ const _getScreenNameAdvanced = (
     default:
       return null;
   }
+};
+
+const updateAnswer = (
+  currentQuestionIndex: number,
+  questions: SurfLevelQuestion[],
+  selectedAnswer: SelectedSurfLevelAnswer,
+): SurfLevelQuestion[] => {
+  const updatedQuestionsArr = questions;
+  updatedQuestionsArr[currentQuestionIndex].answer = selectedAnswer;
+  return updatedQuestionsArr;
 };
 
 const styles = StyleSheet.create({
