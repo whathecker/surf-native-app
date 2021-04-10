@@ -40,9 +40,7 @@ const GoBackButtonInHeader = () => <GoBackButton />;
 const SurfProfileQuestionsNav: React.FunctionComponent = () => {
   const questionScreenOptions = {
     title: "",
-    headerStyle: {
-      backgroundColor: "transparent",
-    },
+    headerTransparent: true,
     headerLeft: GoBackButtonInHeader,
   };
   return (
