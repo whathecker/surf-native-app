@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion  */
-/* eslint-disable no-console  */
 import React, { useReducer } from "react";
 import { surfProfileApi } from "../api";
 import { SurfProfile, SurfLevelQuestionsHolder } from "../types/surf-profile";
