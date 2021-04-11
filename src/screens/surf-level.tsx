@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { SurfProfileContext } from "../context/surf-profile-context";
 import { StackNavigationProp } from "@react-navigation/stack";
 import {
   SurfLevelQuestionsStackParamList,
@@ -31,6 +32,7 @@ type RenderFuncProps = { item: SurfLevelData };
 
 const SurfLevelScreen: React.FC<Props> = ({ navigation }: Props) => {
   const [selectedLevel, setSelectedLevel] = useState<SelectedSurfLevel>(null);
+  const { createSurfProfile } = useContext(SurfProfileContext);
 
   const surfLevels: SurfLevelData[] = [
     {
@@ -88,43 +90,44 @@ const SurfLevelScreen: React.FC<Props> = ({ navigation }: Props) => {
           title="Next"
           color="blue"
           disabled={selectedLevel === null}
-          onPress={() => {
-            handleNextStepPress(selectedLevel, navigation);
+          onPress={async () => {
+            if (selectedLevel === "novice") {
+              await createSurfProfile({
+                selectedSurfLevel: selectedLevel,
+                currentIndex: 0,
+                questions: null,
+              });
+            } else {
+              const nextScreenName = getFirstQuestionScreenName(selectedLevel);
+
+              let questions = null;
+              selectedLevel === "beginner"
+                ? (questions = beginnerQuestions)
+                : null;
+              selectedLevel === "intermediate"
+                ? (questions = intermediateQuestions)
+                : null;
+              selectedLevel === "advanced"
+                ? (questions = advancedQuestions)
+                : null;
+
+              if (!nextScreenName) {
+                // Something is wrong handle error here
+              }
+
+              if (nextScreenName) {
+                navigation.navigate(nextScreenName, {
+                  selectedSurfLevel: selectedLevel,
+                  currenctIndex: 0,
+                  questions: questions,
+                });
+              }
+            }
           }}
         />
       </View>
     </>
   );
-};
-
-const handleNextStepPress = (
-  selectedLevel: SelectedSurfLevel,
-  navigation: SurfLevelScreenNavProp,
-): void => {
-  if (selectedLevel === "novice") {
-    // send the data to backend
-  } else {
-    const nextScreenName = getFirstQuestionScreenName(selectedLevel);
-
-    let questions = null;
-    selectedLevel === "beginner" ? (questions = beginnerQuestions) : null;
-    selectedLevel === "intermediate"
-      ? (questions = intermediateQuestions)
-      : null;
-    selectedLevel === "advanced" ? (questions = advancedQuestions) : null;
-
-    if (!nextScreenName) {
-      // Something is wrong handle error here
-    }
-
-    if (nextScreenName) {
-      navigation.navigate(nextScreenName, {
-        selectedSurfLevel: selectedLevel,
-        currenctIndex: 0,
-        questions: questions,
-      });
-    }
-  }
 };
 
 const getFirstQuestionScreenName = (

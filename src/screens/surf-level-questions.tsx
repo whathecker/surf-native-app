@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { SurfProfileContext } from "../context/surf-profile-context";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 import {
@@ -46,6 +47,8 @@ const SurfLevelQuestionScreen: React.FC<Props> = ({
     null,
   );
 
+  const { createSurfProfile } = useContext(SurfProfileContext);
+
   const renderSurfLevelAnswerButton = ({ item }: RenderFuncProps) => {
     const updateSelectedAnswer = (
       setSelectedAnswer: React.Dispatch<
@@ -86,7 +89,7 @@ const SurfLevelQuestionScreen: React.FC<Props> = ({
             title="Next"
             color="blue"
             disabled={selectedAnswer === null}
-            onPress={() => {
+            onPress={async () => {
               const nextScreenName = findNextQuestionScreenName(
                 selectedLevel,
                 currentQuestionIndex,
@@ -99,7 +102,11 @@ const SurfLevelQuestionScreen: React.FC<Props> = ({
               );
 
               if (!nextScreenName) {
-                // TODO: implement data submission
+                await createSurfProfile({
+                  selectedSurfLevel: selectedLevel,
+                  currentIndex: currentQuestionIndex,
+                  questions: updatedQuestion,
+                });
               }
 
               if (nextScreenName) {
