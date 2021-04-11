@@ -89,31 +89,42 @@ const SurfLevelScreen: React.FC<Props> = ({ navigation }: Props) => {
           color="blue"
           disabled={selectedLevel === null}
           onPress={() => {
-            const nextScreenName = getFirstQuestionScreenName(selectedLevel);
-
-            let questions = null;
-            selectedLevel === "beginner"
-              ? (questions = beginnerQuestions)
-              : null;
-            selectedLevel === "intermediate"
-              ? (questions = intermediateQuestions)
-              : null;
-            selectedLevel === "advanced"
-              ? (questions = advancedQuestions)
-              : null;
-
-            if (nextScreenName) {
-              navigation.navigate(nextScreenName, {
-                selectedSurfLevel: selectedLevel,
-                currenctIndex: 0,
-                questions: questions,
-              });
-            }
+            handleNextStepPress(selectedLevel, navigation);
           }}
         />
       </View>
     </>
   );
+};
+
+const handleNextStepPress = (
+  selectedLevel: SelectedSurfLevel,
+  navigation: SurfLevelScreenNavProp,
+): void => {
+  if (selectedLevel === "novice") {
+    // send the data to backend
+  } else {
+    const nextScreenName = getFirstQuestionScreenName(selectedLevel);
+
+    let questions = null;
+    selectedLevel === "beginner" ? (questions = beginnerQuestions) : null;
+    selectedLevel === "intermediate"
+      ? (questions = intermediateQuestions)
+      : null;
+    selectedLevel === "advanced" ? (questions = advancedQuestions) : null;
+
+    if (!nextScreenName) {
+      // Something is wrong handle error here
+    }
+
+    if (nextScreenName) {
+      navigation.navigate(nextScreenName, {
+        selectedSurfLevel: selectedLevel,
+        currenctIndex: 0,
+        questions: questions,
+      });
+    }
+  }
 };
 
 const getFirstQuestionScreenName = (
