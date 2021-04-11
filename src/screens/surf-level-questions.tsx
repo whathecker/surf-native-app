@@ -37,7 +37,7 @@ const SurfLevelQuestionScreen: React.FC<Props> = ({
   route,
   navigation,
 }: Props) => {
-  const currentQuestionIndex = route.params?.currenctIndex || 0;
+  const currentQuestionIndex = route.params?.currentIndex || 0;
   const selectedLevel = route.params!.selectedSurfLevel;
 
   const questions = route.params!.questions!;
@@ -112,7 +112,7 @@ const SurfLevelQuestionScreen: React.FC<Props> = ({
               if (nextScreenName) {
                 navigation.navigate(nextScreenName, {
                   selectedSurfLevel: selectedLevel,
-                  currenctIndex: currentQuestionIndex + 1,
+                  currentIndex: currentQuestionIndex + 1,
                   questions: updatedQuestion,
                 });
               }

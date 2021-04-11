@@ -12,6 +12,8 @@ type SurfProfileState = {
 
 type ContextProviderProps = {
   state: SurfProfileState;
+  fetchSurfProfile: () => Promise<void>;
+  createSurfProfile: (payload: SurfLevelQuestionsHolder) => Promise<void>;
 };
 
 enum SurfProfileActionType {
@@ -89,6 +91,8 @@ const defaultSurfProfileState: SurfProfileState = {
 
 const defaultContextProviderProps: ContextProviderProps = {
   state: defaultSurfProfileState,
+  fetchSurfProfile: () => Promise.resolve(),
+  createSurfProfile: () => Promise.resolve(),
 };
 
 const SurfProfileContext = React.createContext(defaultContextProviderProps);

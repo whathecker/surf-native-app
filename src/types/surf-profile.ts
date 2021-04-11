@@ -23,6 +23,6 @@ export type SurfLevelQuestion = {
 
 export type SurfLevelQuestionsHolder = {
   selectedSurfLevel: SelectedSurfLevel;
-  currenctIndex: number;
+  currentIndex: number;
   questions: SurfLevelQuestion[] | null;
 };

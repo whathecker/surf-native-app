@@ -118,7 +118,7 @@ const SurfLevelScreen: React.FC<Props> = ({ navigation }: Props) => {
               if (nextScreenName) {
                 navigation.navigate(nextScreenName, {
                   selectedSurfLevel: selectedLevel,
-                  currenctIndex: 0,
+                  currentIndex: 0,
                   questions: questions,
                 });
               }
