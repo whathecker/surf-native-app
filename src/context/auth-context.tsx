@@ -10,6 +10,9 @@ type AuthState = {
 
 type ContextProviderProps = {
   state: AuthState;
+  signIn: (authIdp: string) => Promise<void>;
+  restoreToken: () => Promise<void>;
+  signOut: () => Promise<void>;
 };
 
 enum AuthActionType {
@@ -107,6 +110,9 @@ const defaultAuthState: AuthState = { token: null };
 
 const defaultContextProviderProps: ContextProviderProps = {
   state: defaultAuthState,
+  signIn: () => Promise.resolve(),
+  restoreToken: () => Promise.resolve(),
+  signOut: () => Promise.resolve(),
 };
 
 const AuthContext = React.createContext(defaultContextProviderProps);
