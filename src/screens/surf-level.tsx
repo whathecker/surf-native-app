@@ -51,15 +51,15 @@ const SurfLevelScreen: React.FC<Props> = ({ navigation }: Props) => {
     },
   ];
 
-  const updateSelectedLevel = (
-    setSelectedLevel: React.Dispatch<React.SetStateAction<SelectedSurfLevel>>,
-  ) => {
-    return (selectedLevel: SelectedSurfLevel): void => {
-      setSelectedLevel(selectedLevel);
-    };
-  };
-
   const renderSurfLevelButton = ({ item }: RenderFuncProps) => {
+    const updateSelectedLevel = (
+      setSelectedLevel: React.Dispatch<React.SetStateAction<SelectedSurfLevel>>,
+    ) => {
+      return (selectedLevel: SelectedSurfLevel): void => {
+        setSelectedLevel(selectedLevel);
+      };
+    };
+
     return (
       <View style={styles.buttonWrapper}>
         <SurfLevelButton

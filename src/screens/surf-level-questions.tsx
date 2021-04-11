@@ -46,17 +46,17 @@ const SurfLevelQuestionScreen: React.FC<Props> = ({
     null,
   );
 
-  const updateSelectedAnswer = (
-    setSelectedAnswer: React.Dispatch<
-      React.SetStateAction<SelectedSurfLevelAnswer>
-    >,
-  ) => {
-    return (selected: SelectedSurfLevelAnswer): void => {
-      setSelectedAnswer(selected);
-    };
-  };
-
   const renderSurfLevelAnswerButton = ({ item }: RenderFuncProps) => {
+    const updateSelectedAnswer = (
+      setSelectedAnswer: React.Dispatch<
+        React.SetStateAction<SelectedSurfLevelAnswer>
+      >,
+    ) => {
+      return (selected: SelectedSurfLevelAnswer): void => {
+        setSelectedAnswer(selected);
+      };
+    };
+
     return (
       <View style={styles.buttonWrapper}>
         <SurfLevelAnswerButton
