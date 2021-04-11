@@ -2,7 +2,7 @@
 /* eslint-disable no-console  */
 import React, { useReducer } from "react";
 import { surfProfileApi } from "../api";
-import { SurfProfile } from "../types/surf-profile";
+import { SurfProfile, SurfLevelQuestionsHolder } from "../types/surf-profile";
 import { navigationRef } from "../utils";
 
 type SurfProfileState = {
@@ -63,6 +63,26 @@ const fetchSurfProfile = (dispatch: React.Dispatch<SurfProfileAction>) => {
   };
 };
 
+const createSurfProfile = (dispatch: React.Dispatch<SurfProfileAction>) => {
+  return async (apiPayload: SurfLevelQuestionsHolder) => {
+    try {
+      const surfProfile = await surfProfileApi.postSurfProfile(apiPayload);
+
+      dispatch({
+        type: SurfProfileActionType.fetch,
+        payload: { surfProfile },
+      });
+
+      navigationRef.resetRoot("App");
+    } catch (error) {
+      dispatch({
+        type: SurfProfileActionType.error,
+        payload: { errorMsg: error },
+      });
+    }
+  };
+};
+
 const defaultSurfProfileState: SurfProfileState = {
   surfProfile: { surfLevelScore: null },
 };
@@ -81,6 +101,7 @@ const SurfProfileContextProvider: React.FC = ({ children }) => {
 
   const boundActions = {
     fetchSurfProfile: fetchSurfProfile(dispatch),
+    createSurfProfile: createSurfProfile(dispatch),
   };
 
   return (
