@@ -3,7 +3,7 @@ import { TouchableOpacity, View, Image, Text, StyleSheet } from "react-native";
 import { Typography, Icon, Button } from "../../styles";
 import { AuthButtonProps } from "./types";
 import { capitalizeFirstChar } from "../../utils";
-import { AuthContext } from "../../context/auth-context";
+import { AuthContext } from "../../context/auth";
 
 const AuthButton: React.FC<AuthButtonProps> = ({
   authBrand,
