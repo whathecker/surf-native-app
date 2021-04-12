@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 import React, { useState, useContext } from "react";
-import { SurfProfileContext } from "../context/surf-profile-context";
+import { SurfProfileContext } from "../context/surf-profile";
 import { StackNavigationProp } from "@react-navigation/stack";
 import {
   SurfLevelQuestionsStackParamList,

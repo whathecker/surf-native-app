@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useState, useContext } from "react";
-import { SurfProfileContext } from "../context/surf-profile-context";
+import { SurfProfileContext } from "../context/surf-profile";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 import {

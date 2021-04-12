@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { SurfProfileContext } from "../context/surf-profile-context";
+import { SurfProfileContext } from "../context/surf-profile";
 
 const PostAuthScreen: React.FC = () => {
   const { fetchSurfProfile } = useContext(SurfProfileContext);
