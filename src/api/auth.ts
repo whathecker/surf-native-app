@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as AuthSession from "expo-auth-session";
 import { getQueryString } from "../utils";
 import { createCodeChallenge } from "../utils";
@@ -6,12 +7,17 @@ type AuthToken = {
   authToken: string;
 };
 
-const handleOAuth = async (idp: string): Promise<string> => {
+type OAuthResult = {
+  verifier: string;
+  code: string;
+};
+
+const handleOAuth = async (idp: string): Promise<OAuthResult> => {
   const auth0ClientId = "M6bdC9X6ACFckrMCBqxlaPK9t4Q1GKiA";
   const auth0Domain = "https://dev-817dakf7.eu.auth0.com";
 
   try {
-    const codeChallgne = await createCodeChallenge();
+    const { verifier, codeChallenge } = await createCodeChallenge();
     const redirectUrl = AuthSession.makeRedirectUri({ useProxy: true });
 
     const authUrl =
@@ -22,15 +28,17 @@ const handleOAuth = async (idp: string): Promise<string> => {
         scope: "read:surfProfile",
         connection: idp === "google" ? "google-oauth2" : idp,
         response_type: "code",
-        code_challenge: codeChallgne,
+        code_challenge: codeChallenge,
         code_challenge_method: "S256",
         redirect_uri: redirectUrl,
       });
 
     const result = await AuthSession.startAsync({ authUrl });
-
     if (result.params.code) {
-      return Promise.resolve(result.params.code);
+      return Promise.resolve({
+        verifier: verifier,
+        code: result.params.code,
+      });
     } else {
       return Promise.reject("login failed");
     }
@@ -39,8 +47,12 @@ const handleOAuth = async (idp: string): Promise<string> => {
   }
 };
 
-const getAuthToken = async (authcode: string): Promise<AuthToken> => {
+const getAuthToken = async (
+  authcode: string,
+  _verifier: string,
+): Promise<AuthToken> => {
   try {
+    // Call cloud function here!!
     return Promise.resolve({ authToken: authcode + "_success_token" });
   } catch (error) {
     return Promise.reject("error");

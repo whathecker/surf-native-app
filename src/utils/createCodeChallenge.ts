@@ -7,7 +7,12 @@ function trimmBase64String(str: string): string {
   return str.replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
 }
 
-export default async (): Promise<string> => {
+type AuthChallenges = {
+  verifier: string;
+  codeChallenge: string;
+};
+
+export default async (): Promise<AuthChallenges> => {
   const bytes = base64.fromByteArray(Random.getRandomBytes(32));
 
   const verifier = trimmBase64String(bytes);
@@ -18,5 +23,8 @@ export default async (): Promise<string> => {
     { encoding: CryptoEncoding.BASE64 },
   );
 
-  return Promise.resolve(trimmBase64String(digest));
+  return Promise.resolve({
+    verifier: verifier,
+    codeChallenge: trimmBase64String(digest),
+  });
 };
