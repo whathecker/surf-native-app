@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as AuthSession from "expo-auth-session";
+import { axiosAuth } from "./instances";
 import { getQueryString } from "../utils";
 import { createCodeChallenge } from "../utils";
 
@@ -52,8 +53,10 @@ const getAuthToken = async (
   _verifier: string,
 ): Promise<AuthToken> => {
   try {
-    // Call cloud function here!!
-    return Promise.resolve({ authToken: authcode + "_success_token" });
+    const response = await axiosAuth.get("/token", {
+      withCredentials: true,
+    });
+    return Promise.resolve({ authToken: response.data + "_success_token" });
   } catch (error) {
     return Promise.reject("error");
   }
