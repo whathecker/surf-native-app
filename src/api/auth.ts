@@ -11,6 +11,7 @@ type AuthToken = {
 type OAuthResult = {
   verifier: string;
   code: string;
+  redirectUrl: string;
 };
 
 const handleOAuth = async (idp: string): Promise<OAuthResult> => {
@@ -39,6 +40,7 @@ const handleOAuth = async (idp: string): Promise<OAuthResult> => {
       return Promise.resolve({
         verifier: verifier,
         code: result.params.code,
+        redirectUrl: redirectUrl,
       });
     } else {
       return Promise.reject("login failed");
@@ -49,11 +51,18 @@ const handleOAuth = async (idp: string): Promise<OAuthResult> => {
 };
 
 const getAuthToken = async (
-  authcode: string,
-  _verifier: string,
+  authCode: string,
+  verifier: string,
+  redirectUrl: string,
 ): Promise<AuthToken> => {
   try {
-    const response = await axiosAuth.get("/token", {
+    const payload = {
+      authCode,
+      verifier,
+      redirectUrl,
+      caller: "native",
+    };
+    const response = await axiosAuth.post("/token", payload, {
       withCredentials: true,
     });
     return Promise.resolve({ authToken: response.data + "_success_token" });

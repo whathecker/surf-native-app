@@ -6,8 +6,10 @@ import { secureStorage, navigationRef } from "../../utils";
 export const signIn = (dispatch: React.Dispatch<AuthAction>) => {
   return async (authIdp: string): Promise<void> => {
     try {
-      const { verifier, code } = await authApi.handleOAuth(authIdp);
-      const result = await authApi.getAuthToken(code, verifier);
+      const { verifier, code, redirectUrl } = await authApi.handleOAuth(
+        authIdp,
+      );
+      const result = await authApi.getAuthToken(code, verifier, redirectUrl);
 
       await secureStorage.save("token", result.authToken);
 
