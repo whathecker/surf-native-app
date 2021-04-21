@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { TouchableOpacity, View, Image, Text, StyleSheet } from "react-native";
-import { Typography, Icon, Container } from "../../styles";
+import { Typography, Icon, Button } from "../../styles";
 import { AuthButtonProps } from "./types";
 import { capitalizeFirstChar } from "../../utils";
-import { AuthContext } from "../../context/auth-context";
+import { AuthContext } from "../../context/auth";
 
 const AuthButton: React.FC<AuthButtonProps> = ({
   authBrand,
@@ -48,29 +48,15 @@ const AuthButton: React.FC<AuthButtonProps> = ({
   );
 };
 
-const authButtonStyle = {
-  ...Container.flexStartContainer,
-  width: "100%",
-  paddingTop: 18,
-  paddingBottom: 18,
-  borderRadius: 12,
-};
-
 const styles = StyleSheet.create({
   authButton: {
-    ...authButtonStyle,
-    backgroundColor: "white",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderColor: "black",
+    ...Button.authButtonBasic,
   },
   authButtonApple: {
-    ...authButtonStyle,
-    backgroundColor: "black",
+    ...Button.appleAuthButton,
   },
   authButtonFacebook: {
-    ...authButtonStyle,
-    backgroundColor: "blue",
+    ...Button.facebookAuthButton,
   },
   iconContainer: {
     marginRight: 35,

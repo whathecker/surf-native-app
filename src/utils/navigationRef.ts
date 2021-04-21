@@ -29,4 +29,8 @@ const resetRoot = (routeName: string): void => {
   });
 };
 
-export default { setNavigator, navigate, resetRoot };
+const goBack = (): void => {
+  navigator!.goBack();
+};
+
+export default { setNavigator, navigate, resetRoot, goBack };

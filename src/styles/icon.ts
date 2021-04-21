@@ -9,3 +9,8 @@ export const authBrandIcon: ImageStyle = {
   width: 30,
   height: 30,
 };
+
+export const geneticIconMedium: ImageStyle = {
+  width: 32,
+  height: 32,
+};

@@ -7,11 +7,16 @@ import {
   SignUpScreen,
   SignInScreen,
   ResolveAuthScreen,
+  PostAuthScreen,
+  SurfLevelScreen,
+  SurfLevelQuestionsScreen,
 } from "./screens";
+import { GoBackButton } from "./components";
 
 const RootStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const AuthStack = createStackNavigator<AuthStackParamList>();
+const SurfProfileQuestionsStack = createStackNavigator();
 
 const AuthNav: React.FunctionComponent = () => {
   return (
@@ -29,6 +34,94 @@ const AuthNav: React.FunctionComponent = () => {
     </AuthStack.Navigator>
   );
 };
+
+const GoBackButtonInHeader = () => <GoBackButton />;
+
+const SurfProfileQuestionsNav: React.FunctionComponent = () => {
+  const questionScreenOptions = {
+    title: "",
+    headerTransparent: true,
+    headerLeft: GoBackButtonInHeader,
+  };
+  return (
+    <SurfProfileQuestionsStack.Navigator>
+      <SurfProfileQuestionsStack.Screen
+        name="SurfLevel"
+        options={{ headerShown: false }}
+        component={SurfLevelScreen}
+      />
+
+      <SurfProfileQuestionsStack.Screen
+        name="BeginnerLevelQuestionsOne"
+        options={questionScreenOptions}
+        component={SurfLevelQuestionsScreen}
+      />
+      <SurfProfileQuestionsStack.Screen
+        name="BeginnerLevelQuestionsTwo"
+        options={questionScreenOptions}
+        component={SurfLevelQuestionsScreen}
+      />
+      <SurfProfileQuestionsStack.Screen
+        name="BeginnerLevelQuestionsThree"
+        options={questionScreenOptions}
+        component={SurfLevelQuestionsScreen}
+      />
+      <SurfProfileQuestionsStack.Screen
+        name="BeginnerLevelQuestionsFour"
+        options={questionScreenOptions}
+        component={SurfLevelQuestionsScreen}
+      />
+
+      <SurfProfileQuestionsStack.Screen
+        name="IntermediateLevelQuestionsOne"
+        options={questionScreenOptions}
+        component={SurfLevelQuestionsScreen}
+      />
+      <SurfProfileQuestionsStack.Screen
+        name="IntermediateLevelQuestionsTwo"
+        options={questionScreenOptions}
+        component={SurfLevelQuestionsScreen}
+      />
+      <SurfProfileQuestionsStack.Screen
+        name="IntermediateLevelQuestionsThree"
+        options={questionScreenOptions}
+        component={SurfLevelQuestionsScreen}
+      />
+      <SurfProfileQuestionsStack.Screen
+        name="IntermediateLevelQuestionsFour"
+        options={questionScreenOptions}
+        component={SurfLevelQuestionsScreen}
+      />
+      <SurfProfileQuestionsStack.Screen
+        name="IntermediateLevelQuestionsFive"
+        options={questionScreenOptions}
+        component={SurfLevelQuestionsScreen}
+      />
+
+      <SurfProfileQuestionsStack.Screen
+        name="AdvancedLevelQuestionsOne"
+        options={questionScreenOptions}
+        component={SurfLevelQuestionsScreen}
+      />
+      <SurfProfileQuestionsStack.Screen
+        name="AdvancedLevelQuestionsTwo"
+        options={questionScreenOptions}
+        component={SurfLevelQuestionsScreen}
+      />
+      <SurfProfileQuestionsStack.Screen
+        name="AdvancedLevelQuestionsThree"
+        options={questionScreenOptions}
+        component={SurfLevelQuestionsScreen}
+      />
+      <SurfProfileQuestionsStack.Screen
+        name="AdvancedLevelQuestionsFour"
+        options={questionScreenOptions}
+        component={SurfLevelQuestionsScreen}
+      />
+    </SurfProfileQuestionsStack.Navigator>
+  );
+};
+
 const AppNav: React.FunctionComponent = () => {
   return (
     <Tab.Navigator>
@@ -49,6 +142,16 @@ const Root: React.FunctionComponent = () => {
         name="Auth"
         options={{ headerShown: false }}
         component={AuthNav}
+      />
+      <RootStack.Screen
+        name="PostAuth"
+        options={{ headerShown: false }}
+        component={PostAuthScreen}
+      />
+      <RootStack.Screen
+        name="SurfProfileQuestions"
+        options={{ headerShown: false }}
+        component={SurfProfileQuestionsNav}
       />
       <RootStack.Screen name="App" component={AppNav} />
     </RootStack.Navigator>

@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test GoBackButton component should renders GoBackButton component correctly 1`] = `
+<View
+  accessible={true}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "marginLeft": 20,
+      "marginTop": 55,
+      "opacity": 1,
+    }
+  }
+>
+  <Image
+    source={1}
+    style={
+      Object {
+        "height": 32,
+        "width": 32,
+      }
+    }
+  />
+</View>
+`;
