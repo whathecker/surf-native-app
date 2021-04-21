@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as AuthSession from "expo-auth-session";
-import { axiosAuth } from "./instances";
-import { getQueryString } from "../utils";
+import { getQueryString, getUriEncodedPayload } from "../utils";
 import { createCodeChallenge } from "../utils";
+import axios from "axios";
 
 type AuthToken = {
   authToken: string;
@@ -15,8 +15,8 @@ type OAuthResult = {
 };
 
 const handleOAuth = async (idp: string): Promise<OAuthResult> => {
-  const auth0ClientId = "M6bdC9X6ACFckrMCBqxlaPK9t4Q1GKiA";
-  const auth0Domain = "https://dev-817dakf7.eu.auth0.com";
+  const auth0ClientId = "oruIm9KzWSP6RwvdiKazYUiurld7VYwu"; // TODO: move it to env var
+  const auth0Domain = "https://dev-817dakf7.eu.auth0.com"; // TODO: move it to env var
 
   try {
     const { verifier, codeChallenge } = await createCodeChallenge();
@@ -36,6 +36,7 @@ const handleOAuth = async (idp: string): Promise<OAuthResult> => {
       });
 
     const result = await AuthSession.startAsync({ authUrl });
+
     if (result.params.code) {
       return Promise.resolve({
         verifier: verifier,
@@ -56,18 +57,28 @@ const getAuthToken = async (
   redirectUrl: string,
 ): Promise<AuthToken> => {
   try {
+    const auth0Domain = "https://dev-817dakf7.eu.auth0.com"; // TODO: move it to env var
+
     const payload = {
-      authCode,
-      verifier,
-      redirectUrl,
-      caller: "native",
+      grant_type: "authorization_code",
+      client_id: "oruIm9KzWSP6RwvdiKazYUiurld7VYwu", // TODO: move it to env var
+      code_verifier: verifier,
+      code: authCode,
+      redirect_uri: `${redirectUrl}/callback`,
     };
-    const response = await axiosAuth.post("/token", payload, {
-      withCredentials: true,
+
+    const response = await axios.request({
+      method: "POST",
+      url: `${auth0Domain}/oauth/token`,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      data: getUriEncodedPayload(payload),
     });
-    return Promise.resolve({ authToken: response.data + "_success_token" });
+
+    const token: string = response.data.access_token;
+
+    return Promise.resolve({ authToken: token });
   } catch (error) {
-    return Promise.reject("error");
+    return Promise.reject(error);
   }
 };
 
