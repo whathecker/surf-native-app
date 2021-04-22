@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as AuthSession from "expo-auth-session";
+import Constants from "expo-constants";
 import { getQueryString, getUriEncodedPayload } from "../utils";
 import { createCodeChallenge } from "../utils";
 import axios from "axios";
@@ -14,10 +15,10 @@ type OAuthResult = {
   redirectUrl: string;
 };
 
-const handleOAuth = async (idp: string): Promise<OAuthResult> => {
-  const auth0ClientId = "oruIm9KzWSP6RwvdiKazYUiurld7VYwu"; // TODO: move it to env var
-  const auth0Domain = "https://dev-817dakf7.eu.auth0.com"; // TODO: move it to env var
+const auth0ClientId: string = Constants.manifest.extra.auth0ClientId;
+const auth0Domain: string = Constants.manifest.extra.auth0Domain;
 
+const handleOAuth = async (idp: string): Promise<OAuthResult> => {
   try {
     const { verifier, codeChallenge } = await createCodeChallenge();
     const redirectUrl = AuthSession.makeRedirectUri({ useProxy: true });
@@ -57,11 +58,9 @@ const getAuthToken = async (
   redirectUrl: string,
 ): Promise<AuthToken> => {
   try {
-    const auth0Domain = "https://dev-817dakf7.eu.auth0.com"; // TODO: move it to env var
-
     const payload = {
       grant_type: "authorization_code",
-      client_id: "oruIm9KzWSP6RwvdiKazYUiurld7VYwu", // TODO: move it to env var
+      client_id: auth0ClientId, // TODO: move it to env var
       code_verifier: verifier,
       code: authCode,
       redirect_uri: `${redirectUrl}/callback`,
@@ -84,12 +83,10 @@ const getAuthToken = async (
 
 const clearAuthSession = async (): Promise<string> => {
   try {
-    const auth0Domain = "https://dev-817dakf7.eu.auth0.com";
-
     await axios.request({
       method: "GET",
       url: `${auth0Domain}/v2/logout${getQueryString({
-        client_id: "oruIm9KzWSP6RwvdiKazYUiurld7VYwu",
+        client_id: auth0ClientId,
       })}`,
     });
     return Promise.resolve("Success");
