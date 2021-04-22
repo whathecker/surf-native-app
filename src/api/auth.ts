@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as AuthSession from "expo-auth-session";
-import Constants from "expo-constants";
+import config from "../config";
 import { getQueryString, getUriEncodedPayload } from "../utils";
 import { createCodeChallenge } from "../utils";
 import axios from "axios";
@@ -15,8 +15,8 @@ type OAuthResult = {
   redirectUrl: string;
 };
 
-const auth0ClientId: string = Constants.manifest.extra.auth0ClientId;
-const auth0Domain: string = Constants.manifest.extra.auth0Domain;
+const auth0ClientId = config.auth0ClientId;
+const auth0Domain = config.auth0Domain;
 
 const handleOAuth = async (idp: string): Promise<OAuthResult> => {
   try {
