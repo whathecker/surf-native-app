@@ -55,6 +55,7 @@ export const restoreToken = (dispatch: React.Dispatch<AuthAction>) => {
 export const signOut = (dispatch: React.Dispatch<AuthAction>) => {
   return async (): Promise<void> => {
     try {
+      await authApi.clearAuthSession();
       await secureStorage.removeValue("token");
 
       dispatch({ type: AuthActionType.signOut });

@@ -82,4 +82,20 @@ const getAuthToken = async (
   }
 };
 
-export default { handleOAuth, getAuthToken };
+const clearAuthSession = async (): Promise<string> => {
+  try {
+    const auth0Domain = "https://dev-817dakf7.eu.auth0.com";
+
+    await axios.request({
+      method: "GET",
+      url: `${auth0Domain}/v2/logout${getQueryString({
+        client_id: "oruIm9KzWSP6RwvdiKazYUiurld7VYwu",
+      })}`,
+    });
+    return Promise.resolve("Success");
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export default { handleOAuth, getAuthToken, clearAuthSession };
