@@ -1,1 +1,1 @@
-export { default as axiosAuth } from "./axios-auth";
+export { default as axiosSurf } from "./axios-surf";

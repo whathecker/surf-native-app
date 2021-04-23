@@ -1,10 +1,17 @@
+import { axiosSurf } from "./instances";
 import { SurfProfile, SurfLevelQuestionsHolder } from "../types/surf-profile";
+import { secureStorage } from "../utils";
 
 const getSurfProfile = async (
   expectedResult: boolean,
 ): Promise<SurfProfile> => {
   try {
-    // Mock implementation: update later with actual response from API
+    const token = await secureStorage.getValue("token");
+    
+    await axiosSurf.get("/test", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
     if (expectedResult) {
       return Promise.resolve({ surfLevelScore: 50 });
     } else {
