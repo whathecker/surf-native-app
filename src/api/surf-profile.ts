@@ -7,7 +7,7 @@ const getSurfProfile = async (
 ): Promise<SurfProfile> => {
   try {
     const token = await secureStorage.getValue("token");
-    
+
     await axiosSurf.get("/test", {
       headers: { Authorization: `Bearer ${token}` },
     });
