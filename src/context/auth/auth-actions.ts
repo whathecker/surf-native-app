@@ -32,6 +32,8 @@ export const restoreToken = (dispatch: React.Dispatch<AuthAction>) => {
     try {
       const authToken = await secureStorage.getValue("token");
 
+      // TODO: add check against api to find if token is valid
+
       if (authToken === null) {
         navigationRef.resetRoot("Auth");
       }

@@ -1,6 +1,6 @@
 import React from "react";
 import { surfProfileApi } from "../../api";
-import { navigationRef } from "../../utils";
+import { navigationRef, handleAuthError } from "../../utils";
 import { SurfProfileAction, SurfProfileActionType } from "./types";
 import { SurfLevelQuestionsHolder } from "../../types/surf-profile";
 
@@ -23,10 +23,14 @@ export const fetchSurfProfile = (
         navigationRef.resetRoot("App");
       }
     } catch (error) {
-      dispatch({
-        type: SurfProfileActionType.error,
-        payload: { errorMsg: error },
-      });
+      if (error.type === "auth") {
+        handleAuthError();
+      } else {
+        dispatch({
+          type: SurfProfileActionType.error,
+          payload: { errorMsg: error.message },
+        });
+      }
     }
   };
 };
@@ -45,10 +49,14 @@ export const createSurfProfile = (
 
       navigationRef.resetRoot("App");
     } catch (error) {
-      dispatch({
-        type: SurfProfileActionType.error,
-        payload: { errorMsg: error },
-      });
+      if (error.type === "auth") {
+        handleAuthError();
+      } else {
+        dispatch({
+          type: SurfProfileActionType.error,
+          payload: { errorMsg: error },
+        });
+      }
     }
   };
 };
