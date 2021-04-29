@@ -1,9 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as AuthSession from "expo-auth-session";
 import config from "../config";
-import { getQueryString, getUriEncodedPayload } from "../utils";
-import { createCodeChallenge } from "../utils";
+import {
+  getQueryString,
+  getUriEncodedPayload,
+  createCodeChallenge,
+  getApiError,
+} from "../utils";
 import axios from "axios";
+import { axiosSurf } from "./instances";
 
 type AuthToken = {
   authToken: string;
@@ -95,4 +100,21 @@ const clearAuthSession = async (): Promise<string> => {
   }
 };
 
-export default { handleOAuth, getAuthToken, clearAuthSession };
+const checkTokenValidity = async (token: string): Promise<string> => {
+  try {
+    await axiosSurf.get("/token", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return Promise.resolve("OK");
+  } catch (error) {
+    const apiError = getApiError(error.message);
+    return Promise.reject(apiError);
+  }
+};
+
+export default {
+  handleOAuth,
+  getAuthToken,
+  clearAuthSession,
+  checkTokenValidity,
+};

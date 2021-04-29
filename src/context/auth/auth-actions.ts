@@ -1,7 +1,7 @@
 import React from "react";
 import { AuthAction, AuthActionType } from "./types";
 import { authApi } from "../../api";
-import { secureStorage, navigationRef } from "../../utils";
+import { secureStorage, navigationRef, handleAuthError } from "../../utils";
 
 export const signIn = (dispatch: React.Dispatch<AuthAction>) => {
   return async (authIdp: string): Promise<void> => {
@@ -32,13 +32,11 @@ export const restoreToken = (dispatch: React.Dispatch<AuthAction>) => {
     try {
       const authToken = await secureStorage.getValue("token");
 
-      // TODO: add check against api to find if token is valid
-
       if (authToken === null) {
         navigationRef.resetRoot("Auth");
-      }
+      } else {
+        await authApi.checkTokenValidity(authToken);
 
-      if (authToken) {
         dispatch({
           type: AuthActionType.restore,
           payload: { token: authToken },
@@ -48,8 +46,9 @@ export const restoreToken = (dispatch: React.Dispatch<AuthAction>) => {
     } catch (error) {
       dispatch({
         type: AuthActionType.error,
-        payload: { token: null, errorMsg: error },
+        payload: { token: null, errorMsg: error.message },
       });
+      handleAuthError();
     }
   };
 };
