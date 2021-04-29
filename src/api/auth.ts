@@ -33,7 +33,7 @@ const handleOAuth = async (idp: string): Promise<OAuthResult> => {
       getQueryString({
         client_id: auth0ClientId,
         audience: "https://surf-api.com",
-        scope: "read:surfProfile",
+        scope: "openid profile email offline_access read:surfProfile",
         connection: idp === "google" ? "google-oauth2" : idp,
         response_type: "code",
         code_challenge: codeChallenge,
