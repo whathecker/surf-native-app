@@ -5,3 +5,5 @@ export { default as getUriEncodedPayload } from "./getUriEncodedPayload";
 export { default as secureStorage } from "./secureStorage";
 export { default as navigationRef } from "./navigationRef";
 export { default as createCodeChallenge } from "./createCodeChallenge";
+export { default as getApiError } from "./getApiError";
+export { default as handleAuthError } from "./handleAuthError";

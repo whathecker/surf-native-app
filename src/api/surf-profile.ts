@@ -1,6 +1,6 @@
 import { axiosSurf } from "./instances";
 import { SurfProfile, SurfLevelQuestionsHolder } from "../types/surf-profile";
-import { secureStorage } from "../utils";
+import { secureStorage, getApiError } from "../utils";
 
 const getSurfProfile = async (
   expectedResult: boolean,
@@ -18,7 +18,8 @@ const getSurfProfile = async (
       return Promise.resolve({ surfLevelScore: null });
     }
   } catch (error) {
-    return Promise.reject(error);
+    const apiError = getApiError(error.message);
+    return Promise.reject(apiError);
   }
 };
 
@@ -35,7 +36,8 @@ const postSurfProfile = async ({
     }
     return Promise.resolve({ surfLevelScore: 50 });
   } catch (error) {
-    return Promise.reject(error);
+    const apiError = getApiError(error.message);
+    return Promise.reject(apiError);
   }
 };
 
