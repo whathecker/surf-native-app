@@ -65,7 +65,7 @@ const getAuthToken = async (
   try {
     const payload = {
       grant_type: "authorization_code",
-      client_id: auth0ClientId, // TODO: move it to env var
+      client_id: auth0ClientId, 
       code_verifier: verifier,
       code: authCode,
       redirect_uri: `${redirectUrl}/callback`,
