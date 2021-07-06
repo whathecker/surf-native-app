@@ -9,17 +9,19 @@ export const fetchSurfProfile = (
 ) => {
   return async (): Promise<void> => {
     try {
-      const surfProfile = await surfProfileApi.getSurfProfile(false);
+      const surfProfile = await surfProfileApi.getSurfProfile();
       dispatch({
         type: SurfProfileActionType.fetch,
         payload: { surfProfile },
       });
 
+      // send user to onboarding flow
       if (surfProfile.surfLevelScore === null) {
         navigationRef.resetRoot("SurfProfileQuestions");
-      }
-
-      if (surfProfile.surfLevelScore !== null) {
+      } else if (
+        surfProfile.surfLevelScore !== null &&
+        surfProfile.surfLevelScore >= 0
+      ) {
         navigationRef.resetRoot("App");
       }
     } catch (error) {
